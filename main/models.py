@@ -1,3 +1,4 @@
+# from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 from django.db import models
 
@@ -6,6 +7,7 @@ from django.db import models
 class Trip(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -14,6 +16,9 @@ class Trip(models.Model):
 class Day(models.Model):
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
     num = models.IntegerField(default=1, validators=[MinValueValidator(0)])
+
+    def __str__(self):
+        return self.num
 
 
 class Event(models.Model):
@@ -30,3 +35,8 @@ class Event(models.Model):
     location = models.CharField(max_length=200)
     cost = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return (
+            f"<{self.category}> {self.name} - {self.time} {self.location} {self.cost}"
+        )
