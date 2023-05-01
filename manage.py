@@ -6,7 +6,7 @@ import sys
 # This is a test comment
 # This is a test comment2
 
-
+    
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TravelPlanner.settings')
