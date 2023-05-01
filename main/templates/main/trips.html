@@ -1,0 +1,7 @@
+<h1>{{ trip.name }}</h1>
+{% for day in trip.day_set.all %}
+    <h2>Day: {{ day.num }}</h2>
+    {% for event in day.event_set.all %}
+    <p>{{ event }}</p>
+    {% endfor %}
+{% endfor %}
