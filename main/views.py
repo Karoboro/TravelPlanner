@@ -10,7 +10,9 @@ from .models import Event, Trip, Day
 # Create your views here.
 def index(request):
     trip = Trip.objects.get(pk=1)
-    return render(request, "main/trips.html", {"trip": trip})
+    trips = Trip.objects.all()  # Fetch all the trips
+    context = {"trip": trip, "trips": trips}
+    return render(request, "main/trips.html", context)
 
 
 def create_trip(request):
