@@ -4,7 +4,7 @@ from django.urls import reverse
 
 from django.template import loader
 from .forms import DayForm, EventForm, TripForm
-from .models import Event, Trip
+from .models import Event, Trip, Day
 
 
 # Create your views here.
@@ -60,6 +60,20 @@ def create_day(request):
         form = DayForm()
 
     return render(request, "main/create_day.html", {"form": form})
+
+
+def edit_day(request, day_id):
+    day = Day.objects.get(pk=day_id)
+    if request.method == "POST":
+        form = DayForm(request.POST, instance=day)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        form = DayForm(instance=day)
+
+    return render(request, "main/edit_day.html", {"form": form})
+
 
 
 def create_event(request):
