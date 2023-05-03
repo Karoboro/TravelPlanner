@@ -68,7 +68,10 @@ def edit_day(request, day_id):
 
     return render(request, "main/edit_day.html", {"form": form})
 
-
+def delete_day(request, day_id):
+    day = get_object_or_404(Day, pk=day_id)
+    day.delete()
+    return HttpResponseRedirect(reverse("index"))
 
 def create_event(request):
     if request.method == "POST":
