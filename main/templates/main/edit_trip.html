@@ -1,0 +1,9 @@
+{% block content %}
+    <h2>Edit New Trip</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Edit</button>
+    </form>
+    <a href="{% url 'delete_trip' form.instance.pk %}" onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-primary"><button type="button">Delete</button></a>
+    {% endblock %}
