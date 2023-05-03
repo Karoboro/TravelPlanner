@@ -1,9 +1,32 @@
-<h1>{{ trip.name }}</h1>
-<p>Start Date: {{ trip.start_date }}</p>
-<p>Description: {{ trip.description }}</p>
-{% for day in trip.day_set.all %}
-    <h2>Day: {{ day.num }}</h2>
-    {% for event in day.event_set.all %}
-    <p>{{ event }}</p>
-    {% endfor %}
-{% endfor %}
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+    <h1>Trip Planner</h1>
+</header>
+
+<div class="container2">
+    <aside class="sidebar">
+      <h2>Trips</h2>
+      <ul>
+        {% for trip_item in trips %}
+        <li><a href="{% url 'edit_trip' trip_item.id %}">{{ trip_item.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <main class="trip-details">
+        <h2>{{ trip.name }}</h2>
+        {% for day in trip.day_set.all %}
+        <div class="day">
+            <h3>Day: {{ day.num }}</h3>
+            <p>{{ day.description }}</p>
+            {% for event in day.event_set.all %}
+            <p>{{ event }}</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </main>
+</div>
+<button class="add-btn">+</button>
+{% endblock %}
