@@ -44,8 +44,8 @@ def delete_trip(request, trip_id):
     return HttpResponseRedirect(reverse("index"))
 
 
-def delete_event(request, trip_id):
-    event = get_object_or_404(Event, pk=trip_id)
+def delete_event(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
     event.delete()
     return HttpResponseRedirect(reverse("index"))
 
@@ -84,4 +84,4 @@ def edit_event(request, event_id):
     else:
         form = EventForm(instance=event)
 
-    return render(request, "main/edit_trip.html", {"form": form})
+    return render(request, "main/edit_event.html", {"form": form})
