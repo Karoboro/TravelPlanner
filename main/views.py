@@ -44,6 +44,12 @@ def delete_trip(request, trip_id):
     return HttpResponseRedirect(reverse("index"))
 
 
+def delete_event(request, trip_id):
+    event = get_object_or_404(Event, pk=trip_id)
+    event.delete()
+    return HttpResponseRedirect(reverse("index"))
+
+
 def create_day(request):
     if request.method == "POST":
         form = DayForm(request.POST)

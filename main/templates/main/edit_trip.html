@@ -5,5 +5,5 @@
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
-    <a href="{% url 'delete_trip' form.instance.pk %}" class="btn btn-primary"><button type="button">Delete</button></a>
+    <a href="{% url 'delete_trip' form.instance.pk %}" onclick="return confirm('Are you sure?')" class="btn btn-primary"><button type="button">Delete</button></a>
     {% endblock %}
