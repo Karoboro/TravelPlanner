@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.views.generic.edit import UpdateView
 
 from django.template import loader
 from .forms import DayForm, EventForm, TripForm
@@ -36,16 +37,15 @@ def create_day(request):
     return render(request, "main/create_day.html", {"form": form})
 
 
-def create_activity(request):
+def create_event(request):
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
-            form.save()
             return HttpResponseRedirect(reverse("index"))
     else:
         form = EventForm()
 
-    return render(request, "main/create_activity.html", {"form": form})
+    return render(request, "main/create_event.html", {"form": form})
 
 
 def edit_activity(request, id):
