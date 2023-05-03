@@ -1,0 +1,26 @@
+<h1>Edit Activity</h1>
+
+<form action="updaterecord/{{ activity.id }}" method="post">
+{% csrf_token %}
+Activity Title:<br>
+<input name="title" value="{{ activity.name }}">
+<br><br>
+
+Activity Location:<br>
+<input name="loction" value="{{ activity.location }}">
+<br><br>
+
+Activity Time:<br>
+<input name="time" value="{{ activity.time }}">
+<br><br>
+
+Activity Cost:<br>
+<input name="time" value="{{ activity.cost }}">
+<br><br>
+
+Activity Description:<br>
+<textarea>{{ activity.description }}</textarea>
+<br><br>
+<input type="submit" value="Submit">
+
+</form>
