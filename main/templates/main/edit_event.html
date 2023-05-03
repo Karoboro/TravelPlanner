@@ -1,4 +1,4 @@
-<h1>Edit Activity</h1>
+<!-- <h1>Edit Activity</h1>
 
 <form action="updaterecord/{{ activity.id }}" method="post">
 {% csrf_token %}
@@ -23,4 +23,18 @@ Activity Description:<br>
 <br><br>
 <input type="submit" value="Submit">
 
-</form>
+</form> -->
+
+{% block content %}
+    <h2>Edit Activity</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+    <form method="delete">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Delete</button>
+    </form>
+{% endblock %}

@@ -49,9 +49,27 @@ def create_event(request):
 
 
 def edit_activity(request, id):
-    activity = Event.objects.get(id=id)
-    template = loader.get_template('main/edit_activity.html')
-    context = {
-    'activity': activity,
-    }
-    return HttpResponse(template.render(context, request))
+    # activity = Event.objects.get(id=id)
+    # template = loader.get_template('main/edit_activity.html')
+    # context = {
+    # 'activity': activity,
+    # }
+    # return HttpResponse(template.render(context, request))
+    event = Event.objects.get(pk=id)
+    if request.method == "POST":
+        form = EventForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("index"))
+        
+    elif request.method == "DELETE":
+        event = Event.objects.get(pk=id)
+        event.delete
+        return HttpResponseRedirect(reverse("index"))
+        
+    else:    
+        form = EventForm(instance=event)
+    print(request.method)
+    return render(request, "main/edit_event.html", {"form": form})
+
+
