@@ -18,4 +18,4 @@ class DayForm(forms.ModelForm):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ["name", "category", "time", "location", "cost", "description"]
+        fields = ["day", "name", "category", "time", "location", "cost", "description"]
