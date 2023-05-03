@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="CSS/stylesheet.css">
+  <title>Add Event</title>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">Logo</div>
+    <div class="right-nav">
+      <a href="hours.html" class="go-back">&larr; Go Back</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Create New Event</h1>
+  </header>
+
+  <main>
+    <div class="container">
+      <form class="event-form">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" placeholder="Enter event title" required>
+
+        <label for="time">Time:</label>
+        <input type="datetime-local" id="time" name="time" required>
+
+        <label for="subtasks">Subtasks:</label>
+        <textarea id="subtasks" name="subtasks" rows="4" placeholder="Enter subtasks, separated by commas"></textarea>
+
+        <label for="tags">Tags:</label>
+        <input type="text" id="tags" name="tags" placeholder="Enter tags, separated by commas">
+
+        <button type="submit" class="save-btn">Save</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; Your Company</p>
+  </footer>
+</body>
+
+</html>
