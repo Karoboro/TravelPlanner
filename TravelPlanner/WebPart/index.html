@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trip Itinerary</title>
-  <link rel="stylesheet" href="stylesheet.css">
+  <link rel="stylesheet" href="CSS/stylesheet.css">
+  <title>Travel Planner</title>
 </head>
+
 <body>
   <header>
-    <h1>Trip Itinerary</h1>
+    <nav>
+      <div class="nav-content2">
+        <img src="bonvoyage.png" alt="BonVoyage" class="logo">
+        <div class="right-nav2">
+          <a href="#">New Trip</a>
+          <a href="#">Budget</a>
+          <a href="#">Login</a>
+        </div>
+      </div>
+    </nav>
+    
   </header>
-  <div class="container">
-    <div class="day">
-      <h2>Day 1: Arrival</h2>
-      <p>Arrive at the airport and check into the hotel. Spend the evening exploring the nearby attractions.</p>
-      
-    </div>
-    <div class="day">
-      <h2>Day 2: Sightseeing</h2>
-      <p>Visit famous landmarks such as the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.</p>
-    </div>
-    <div class="day">
-      <h2>Day 3: Shopping and Leisure</h2>
-      <p>Spend the day shopping at the famous Champs-Élysées, and relax in the evening at a local café.</p>
-    </div>
-    <div class="day">
-      <h2>Day 4: Day Trip</h2>
-      <p>Take a day trip to the Palace of Versailles and explore its magnificent gardens.</p>
-    </div>
-    <div class="day">
-      <h2>Day 5: Departure</h2>
-      <p>Check out of the hotel and head to the airport for the departure flight.</p>
-    </div>
+
+  <div class="container2">
+    <aside class="sidebar">
+      <h2>Trips</h2>
+      <ul>
+        <li><a href="#">India</a></li>
+        
+        <li><a href="#">Malaysia</a></li>
+      </ul>
+    </aside>
+
+    <main class="trip-details">
+      <h2>India Trip</h2>
+      <div class="day">
+        <h3>Day 1</h3>
+        <p>Information about Day 1</p>
+        <a href="hours.html">View</a>
+      </div>
+      <div class="day">
+        <h3>Day 2</h3>
+        <p>Information about Day 2</p>
+        <a href="hours.html">View</a>
+      </div>
+      <!-- Add more days here -->
+    </main>
   </div>
+  <button class="add-btn">+</button>
 </body>
+
 </html>

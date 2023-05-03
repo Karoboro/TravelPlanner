@@ -3,104 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Time Range Tasks</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      background-color: #f4f4f4;
-    }
-
-    header {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    h1 {
-      margin-bottom: 0.5rem;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 1rem;
-      background-color: #fff;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 1rem;
-    }
-
-    .grid-item {
-      padding: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      text-align: center;
-      background-color: #f9f9f9;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-      color: #333;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-  </style>
+  <title>Futuristic Day Event Planner</title>
+  <link rel="stylesheet" href="CSS/stylesheet.css">
+  <style>@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');</style>
 </head>
 <body>
+  <nav>
+    <a href="#" class="logo">FDEP</a>
+    <div class="right-nav">
+      <a href="#">New Trip</a>
+      <a href="#">Budget</a>
+      <a href="#">Login</a>
+    </div>
+  </nav>
+
   <header>
-    <h1>Time Range Tasks</h1>
+    <h1>Event Details</h1>
   </header>
   <div class="container">
-    <div class="grid-container">
-      <div class="grid-item">
-        <label for="task-1">0:00 - 3:00</label>
-        <input type="text" id="task-1" placeholder="Task for 0:00 - 3:00">
+    <!-- First event -->
+    <div class="event-details">
+      <h2 class="event-name">Work Meeting</h2>
+      <span class="time">10:00 - 11:00</span>
+      <div class="tags">
+        <span class="tag">Important<span class="remove-tag"></span></span>
       </div>
-      <div class="grid-item">
-        <label for="task-2">3:00 - 6:00</label>
-        <input type="text" id="task-2" placeholder="Task for 3:00 - 6:00">
+      <h3>Subtasks</h3>
+      <ul class="subtasks">
+        <li class="subtask">Prepare presentation</li>
+        <li class="subtask">Review meeting agenda</li>
+        <li class="subtask">Send out pre-meeting materials</li>
+      </ul>
+      <button class="delete-event-btn">Delete</button>
+    </div>
+
+    <!-- Second event -->
+    <div class="event-details">
+      <h2 class="event-name">Lunch with Friends</h2>
+      <span class="time">12:30 - 13:30</span>
+      <div class="tags">
+        <span class="tag">Social</span>
       </div>
-      <div class="grid-item">
-        <label for="task-3">6:00 - 9:00</label>
-        <input type="text" id="task-3" placeholder="Task for 6:00 - 9:00">
+      <h3>Subtasks</h3>
+      <ul class="subtasks">
+        <li class="subtask">Confirm restaurant reservation</li>
+        <li class="subtask">Pick up gift for friend's birthday</li>
+      </ul>
+      <button class="delete-event-btn">Delete</button>
+    </div>
+
+    <!-- Third event -->
+    <div class="event-details">
+      <h2 class="event-name">Yoga Class</h2>
+      <span class="time">18:00 - 19:00</span>
+      <div class="tags">
+        <span class="tag">Health</span>
       </div>
-      <div class="grid-item">
-        <label for="task-4">9:00 - 12:00</label>
-        <input type="text" id="task-4" placeholder="Task for 9:00 - 12:00">
-      </div>
-      <div class="grid-item">
-        <label for="task-5">12:00 - 15:00</label>
-        <input type="text" id="task-5" placeholder="Task for 12:00 - 15:00">
-      </div>
-      <div class="grid-item">
-        <label for="task-6">15:00 - 18:00</label>
-        <input type="text" id="task-6" placeholder="Task for 15:00 - 18:00">
-      </div>
-      <div class="grid-item">
-        <label for="task-7">18:00 - 21:00</label>
-        <input type="text" id="task-7" placeholder="Task for 18:00 - 21:00">
-      </div>
-      <div class="grid-item">
-        <label for="task-8">21:00 - 24:00</label>
-        <input type="text" id="task-8" placeholder="Task for 21:00 - 24:00">
-      </div>
-      </div>
-    </body>
-    
+      <h3>Subtasks</h3>
+      <ul class="subtasks">
+        <li class="subtask">Pack yoga mat</li>
+        <li class="subtask">Bring water bottle</li>
+        <li class="subtask">Wear comfortable clothes</li>
+      </ul>
+      <button class="delete-event-btn">Delete</button>
+    </div>
+
+    <div class="add-event">
+      <a class="add-event-link" href="add.html">+</a>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2023 Futuristic Day Event Planner. All rights reserved.</p>
+  </footer>
+</body>
 </html>
