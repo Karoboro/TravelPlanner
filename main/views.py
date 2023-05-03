@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+from django.template import loader
 from .forms import DayForm, EventForm, TripForm
 from .models import Event, Trip
 
@@ -43,6 +44,12 @@ def delete_trip(request, trip_id):
     return HttpResponseRedirect(reverse("index"))
 
 
+def delete_event(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    event.delete()
+    return HttpResponseRedirect(reverse("index"))
+
+
 def create_day(request):
     if request.method == "POST":
         form = DayForm(request.POST)
@@ -77,4 +84,4 @@ def edit_event(request, event_id):
     else:
         form = EventForm(instance=event)
 
-    return render(request, "main/edit_trip.html", {"form": form})
+    return render(request, "main/edit_event.html", {"form": form})
