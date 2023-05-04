@@ -13,9 +13,9 @@
   
     <nav>
       <div class="nav-content2">
-        <a href="tripview.html"><img src="bonvoyage.png" alt="BonVoyage" class="logo"></a>
+        <a href="{% url 'index' %}"><img src="{% static 'images/bonvoyage.png' %}" alt="BonVoyage logo" width="98" height="64" class="logo"></a>
         <div class="right-nav2">
-          <a href="/create/trip">New Trip</a>
+          <a href="{% url 'create_trip' %}">New Trip</a>
           <a href="#">Budget</a>
           <a href="#">Login</a>
         </div>

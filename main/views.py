@@ -1,18 +1,23 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.template import loader
 from django.urls import reverse
 
-from django.template import loader
 from .forms import DayForm, EventForm, TripForm
-from .models import Event, Trip, Day
+from .models import Day, Event, Trip
 
 
 # Create your views here.
 def index(request):
-    trip = Trip.objects.get(pk=1)
     trips = Trip.objects.all()  # Fetch all the trips
-    context = {"trip": trip, "trips": trips}
+    context = {"trips": trips}
     return render(request, "main/trips.html", context)
+
+
+def view_trip(request, trip_id):
+    trips = Trip.objects.all()
+    trip = Trip.objects.get(pk=trip_id)
+    return render(request, "main/trips.html", {"trip": trip, "trips": trips})
 
 
 def create_trip(request):
@@ -60,6 +65,7 @@ def create_day(request):
 
 def edit_day(request, day_id):
     day = Day.objects.get(pk=day_id)
+    event_list = day.event_set.all()
     if request.method == "POST":
         form = DayForm(request.POST, instance=day)
         if form.is_valid():
@@ -67,13 +73,18 @@ def edit_day(request, day_id):
             return HttpResponseRedirect(reverse("index"))
     else:
         form = DayForm(instance=day)
+        event_list = [EventForm(instance=event) for event in event_list]
 
-    return render(request, "main/edit_day.html", {"form": form})
+    return render(
+        request, "main/edit_day.html", {"form": form, "event_list": event_list}
+    )
+
 
 def delete_day(request, day_id):
     day = get_object_or_404(Day, pk=day_id)
     day.delete()
     return HttpResponseRedirect(reverse("index"))
+
 
 def create_event(request):
     if request.method == "POST":
