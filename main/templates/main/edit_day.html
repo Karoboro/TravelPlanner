@@ -1,8 +1,11 @@
 {% block content %}
-    <h2>Edit New Trip</h2>
+    <h2>Edit Day</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Edit</button>
     </form>
+    {% for event in event_list %}
+        <p>{{ event }}</p>
+    {% endfor %}
 {% endblock %}
