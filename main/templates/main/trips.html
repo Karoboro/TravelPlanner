@@ -20,7 +20,7 @@
         <h2>{{ trip.name }}</h2>
         {% for day in trip.day_set.all %}
         <div class="day">
-            <a href="{% url 'edit_day' day.id %}"><h3>Day: {{ day.num }}</h3></a>
+          <h3><a href="{% url 'edit_day' day.id %}">Day: {{ day.num }}</a></h3>
             <p>{{ day.description }}</p>
             {% for event in day.event_set.all %}
             <p>{{ event }}</p>
@@ -35,5 +35,5 @@
     </main>
     {% endif %}
 </div>
-<a href="/create/day"><button class="add-btn">+</button></a>
+<a href="{% url 'create_day' %}"><button class="add-btn">+</button></a>
 {% endblock %}

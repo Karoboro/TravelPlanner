@@ -12,7 +12,7 @@ class TripForm(forms.ModelForm):
 class DayForm(forms.ModelForm):
     class Meta:
         model = Day
-        fields = ["num"]
+        fields = ["trip", "num"]
 
 
 class EventForm(forms.ModelForm):
