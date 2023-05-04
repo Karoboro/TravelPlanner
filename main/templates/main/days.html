@@ -1,0 +1,33 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<header>
+  <h1>Day</h1>
+</header>
+
+<main>
+    <div class="container">
+        {% for event in day.event_set.all %}
+        <div class="event-details">
+            <h2 class="event-name">{{ event.name }}</h2>
+            <div class="tags">
+                <span class="tag">{{ event.category }}</span>
+            </div>
+            <span class="time">{{ event.time }}</span>
+            <h3>Details</h3>
+            <ul class="subtasks">
+                <li class="subtask">Location: {{ event.location }}</li>
+                <li class="subtask">Cost: ${{ event.cost }}</li>
+            </ul>
+            <h3>Description</h3>
+            <p class="subtask">{{ event.description }}</p>
+            <button class="delete-event-btn">Edit</button>
+            <button class="delete-event-btn">Delete</button>
+        </div>
+        {% endfor %}
+        <div class="add-event">
+            <a class="add-event-link" href="add.html">+</a>
+        </div>
+    </div>
+</main>
+{% endblock %}

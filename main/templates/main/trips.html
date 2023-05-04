@@ -18,22 +18,24 @@
     {% if trip %}
     <main class="trip-details">
         <h2>{{ trip.name }}</h2>
+        <p>{{ trip.start_date }}</p>
+        <p>{{ trip.description }}</p>
         {% for day in trip.day_set.all %}
         <div class="day">
-          <h3><a href="{% url 'edit_day' day.id %}">Day: {{ day.num }}</a></h3>
+          <h3><a href="{% url 'view_day' day.id %}">Day: {{ day.num }}</a></h3>
             <p>{{ day.description }}</p>
             {% for event in day.event_set.all %}
             <p>{{ event }}</p>
             {% endfor %}
         </div>
         {% endfor %}
-    </main>
-    {% else %}
-    <main class="trip-details">
-      <h2>Welcome to BonVoyage!</h2>
-      <h3>Please select or create a trip.</h3>
-    </main>
-    {% endif %}
+        <a href="{% url 'create_day' %}"><button class="add-btn">+</button></a>
+      </main>
+      {% else %}
+      <main class="trip-details">
+        <h2>Welcome to BonVoyage!</h2>
+        <h3>Please select or create a trip.</h3>
+      </main>
+      {% endif %}
 </div>
-<a href="{% url 'create_day' %}"><button class="add-btn">+</button></a>
 {% endblock %}
