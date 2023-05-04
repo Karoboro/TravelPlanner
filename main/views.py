@@ -16,8 +16,13 @@ def index(request):
 
 def view_trip(request, trip_id):
     trips = Trip.objects.all()
-    trip = Trip.objects.get(pk=trip_id)
+    trip = get_object_or_404(Trip, pk=trip_id)
     return render(request, "main/trips.html", {"trip": trip, "trips": trips})
+
+
+def view_day(request, day_id):
+    day = get_object_or_404(Day, pk=day_id)
+    return render(request, "main/days.html", {"day": day})
 
 
 def create_trip(request):
