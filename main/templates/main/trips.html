@@ -29,13 +29,13 @@
             {% endfor %}
         </div>
         {% endfor %}
-    </main>
-    {% else %}
-    <main class="trip-details">
-      <h2>Welcome to BonVoyage!</h2>
-      <h3>Please select or create a trip.</h3>
-    </main>
-    {% endif %}
+        <a href="{% url 'create_day' %}"><button class="add-btn">+</button></a>
+      </main>
+      {% else %}
+      <main class="trip-details">
+        <h2>Welcome to BonVoyage!</h2>
+        <h3>Please select or create a trip.</h3>
+      </main>
+      {% endif %}
 </div>
-<a href="{% url 'create_day' %}"><button class="add-btn">+</button></a>
 {% endblock %}
