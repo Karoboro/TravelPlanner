@@ -6,7 +6,7 @@ from .models import Day, Event, Trip
 class TripForm(forms.ModelForm):
     class Meta:
         model = Trip
-        fields = ["name", "description"]
+        fields = ["name", "start_date", "description"]
 
 
 class DayForm(forms.ModelForm):
