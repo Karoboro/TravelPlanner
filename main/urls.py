@@ -12,7 +12,7 @@ urlpatterns = [
     path("create/day/", views.create_day, name="create_day"),
     path("edit/day/<int:day_id>/", views.edit_day, name="edit_day"),
     path("delete/day/<int:day_id>", views.delete_day, name="delete_day"),
-    path("create/event/", views.create_event, name="create_event"),
+    path("create/event/<int:day_id>", views.create_event, name="create_event"),
     path("edit/event/<int:event_id>/", views.edit_event, name="edit_event"),
     path("delete/event/<int:event_id>", views.delete_event, name="delete_event"),
 ]
