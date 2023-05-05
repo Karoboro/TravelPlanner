@@ -97,8 +97,9 @@ def edit_day(request, day_id):
 
 def delete_day(request, day_id):
     day = get_object_or_404(Day, pk=day_id)
+    trip_id = day.trip.pk
     day.delete()
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("view_trip", kwargs={"trip_id": trip_id}))
 
 
 def create_event(request, day_id):
@@ -124,7 +125,9 @@ def edit_event(request, event_id):
         form.fields["day"].widget = forms.HiddenInput()
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(
+                reverse("view_day", kwargs={"day_id": event.day.pk})
+            )
     else:
         form = EventForm(instance=event)
         form.fields["day"].widget = forms.HiddenInput()
@@ -134,5 +137,6 @@ def edit_event(request, event_id):
 
 def delete_event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
+    day_id = event.day.pk
     event.delete()
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("view_day", kwargs={"day_id": day_id}))
