@@ -117,11 +117,13 @@ def edit_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     if request.method == "POST":
         form = EventForm(request.POST, instance=event)
+        form.fields["day"].widget = forms.HiddenInput()
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse("index"))
     else:
         form = EventForm(instance=event)
+        form.fields["day"].widget = forms.HiddenInput()
 
     return render(request, "main/edit_event.html", {"form": form})
 
