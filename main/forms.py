@@ -27,7 +27,7 @@ class DayForm(forms.ModelForm):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ["day","name", "category", "time", "location", "cost", "description"]
+        fields = ["day", "name", "category", "time", "location", "cost", "description"]
         widgets = {
             "time": forms.TimeInput(attrs={"type": "time"}),
             "cost": forms.NumberInput(attrs={"Step": 0.01, "min": 0}),
