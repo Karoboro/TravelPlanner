@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <header>
-        <h2>Edit Activity</h2>
-    </header>
-    
-    <form class="editForm" method="post">
-        {% csrf_token %}
-        <!-- {{ form.as_p }} -->
-        {% for field in form %}
-            <div class="editField">
-                <span>{{ field.label_tag }}</span>
-                <span>{{ field }}</span>
-            </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+<header>
+    <h1>Create New Event</h1>
+</header>
 
-    <a href="{% url 'delete_event' form.instance.pk %}" onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-primary"><button type="button">Delete</button></a>
+<main>
+    <div class="right-nav2">
+        <a href="{% url 'view_day' form.instance.day.pk %}" class="go-back">&larr; Go Back</a>
+    </div>
+    <div class="container">
+        <form method="post" class="event-form">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="save-btn">Update</button>
+            <a href="{% url 'delete_event' form.instance.pk %}" onclick="return confirm('Are you sure you want to delete this item?')" class="save-btn">Delete</a>
+        </form>
+    </div>
+</main>
 
 {% endblock %}

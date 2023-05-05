@@ -5,6 +5,9 @@
     <h1>Day {{ day }}</h1>
 </header>
 <main>
+    <div class="right-nav2">
+        <a href="{% url 'view_trip' day.trip.pk %}" class="go-back">&larr; Go Back</a>
+    </div>
     <div class="container">
         {% for event in day.event_set.all %}
         <div class="event-details">
@@ -22,12 +25,13 @@
             </ul>
             <h3>Description</h3>
             <p class="subtask">{{ event.description }}</p>
-            <a href="{% url 'edit_event' event.pk %}"><button class="delete-event-btn">Edit</button></a>
+            <a href="{% url 'edit_event' event.pk %}"><button class="edit-event-btn">Edit</button></a>
             <a href="{% url 'delete_event' event.pk %}" onclick="return confirm('Are you sure you want to delete this item?')"><button class="delete-event-btn">Delete</button></a>
         </div>
         {% endfor %}
         <div class="add-event">
-            <a class="add-event-link" href="add.html">+</a>
+            <a href="{% url 'create_event' day.pk %}"><span class="add-event-link">+</span></a>
+
         </div>
     </div>
 </main>
