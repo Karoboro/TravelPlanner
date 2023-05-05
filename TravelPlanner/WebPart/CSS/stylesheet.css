@@ -1,16 +1,9 @@
-:root {
-  --main-color: #1c1c1e;
-  --accent-color: #007aff;
-  --background-color: #f7f7f7;
-  --text-color: #333;
-}
-
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 1.6;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: #f7f7f7;
+  color: #333;
 }
 
 
@@ -20,7 +13,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--background-color);
+  background-color: #f7f7f7;
   padding: 1rem;
 
   width: 98%;
@@ -70,7 +63,7 @@ header {
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  background-image: linear-gradient(135deg, var(--accent-color) 0%, var(--main-color) 100%);
+  background-image: linear-gradient(135deg, #007aff 0%,#1c1c1e 100%);
   color: #fff;
   height: 13vh;
   margin-bottom: 1rem;
@@ -104,7 +97,7 @@ header {
   margin-bottom: 2rem;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid var(--accent-color);
+  border-bottom: 2px solid #007aff;
   position: relative;
 }
 
@@ -138,7 +131,7 @@ header {
 }
 
 .subtask {
-  background-color: var(--background-color);
+  background-color:  #f7f7f7;
   padding: 0.5rem;
   border-radius: 5px;
   margin-bottom: 0.5rem;
@@ -147,7 +140,7 @@ header {
 
 .footer {
   padding: 0.5rem;
-  background-color: var(--main-color);
+  background-color: #1c1c1e;
   color: #fff;
   text-align: center;
 }
@@ -199,7 +192,7 @@ header {
 
 .add-event-link {
   font-size: 24px;
-  background-color: var(--accent-color);
+  background-color: #007aff;
   color: #fff;
   border-radius: 50%;
   width: 50px;
@@ -242,11 +235,11 @@ header {
 .event-form input[type="text"]:focus,
 .event-form input[type="datetime-local"]:focus,
 .event-form textarea:focus {
-  border-color: var(--accent-color);
+  border-color: #007aff;
 }
 
 .save-btn {
-  background-color: var(--main-color);
+  background-color:  #1c1c1e;
   color: #fff;
   font-weight: bold;
   padding: 0.5rem 1rem;
@@ -259,7 +252,7 @@ header {
 }
 
 .save-btn:hover {
-  background-color: var(--accent-color);
+  background-color: #007aff;
   transition: background-color 0.3s ease;
 }
 
@@ -376,6 +369,8 @@ header {
   max-height: 40px;
   margin-right: 0.5rem;
 }
+
+
 
 
 .container2 {
