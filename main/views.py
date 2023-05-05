@@ -56,16 +56,21 @@ def delete_trip(request, trip_id):
     return HttpResponseRedirect(reverse("index"))
 
 
-def create_day(request):
+def create_day(request, trip_id):
     if request.method == "POST":
-        form = DayForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("index"))
-    else:
-        form = DayForm()
-
-    return render(request, "main/create_day.html", {"form": form})
+        data = request.POST.dict()
+        data.update({"trip": Trip.objects.get(pk=trip_id)})
+        day_form = DayForm(data)
+        event_form = EventForm(data)
+        print(day_form.is_valid())
+        print(event_form.is_valid())
+        if day_form.is_valid() and event_form.is_valid():
+            day_form.save()
+            event_form.save()
+            return HttpResponseRedirect(
+                reverse("view_trip", kwargs={"trip_id": trip_id})
+            )
+    return render(request, "main/create_day.html")
 
 
 def edit_day(request, day_id):

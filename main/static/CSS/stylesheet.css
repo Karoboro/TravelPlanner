@@ -229,18 +229,22 @@
   }
   
   .event-form input[type="text"],
-  .event-form input[type="datetime-local"],
+  .event-form input[type="time"],
+  .event-form input[type="number"],
+  .event-form select,
   .event-form textarea {
-    width: 100%;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
+  }
+
+  .event-form textarea {
     resize: vertical;
   }
   
   .event-form input[type="text"]:focus,
-  .event-form input[type="datetime-local"]:focus,
+  .event-form input[type="time"]:focus,
   .event-form textarea:focus {
     border-color: var(--accent-color);
   }

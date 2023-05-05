@@ -29,7 +29,7 @@
             {% endfor %}
         </div>
         {% endfor %}
-        <a href="{% url 'create_day' %}"><button class="add-btn">+</button></a>
+        <a href="{% url 'create_day' trip.id %}"><button class="add-btn">+</button></a>
       </main>
       {% else %}
       <main class="trip-details">
