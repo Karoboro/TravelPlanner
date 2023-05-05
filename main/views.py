@@ -107,7 +107,7 @@ def create_event(request, day_id):
             event.save()
             return HttpResponseRedirect(reverse("view_day", args=[day_id]))
     else:
-        form = EventForm(initial={"day": Day.objects.get(pk=day_id)})
+        form = EventForm(initial={"day": day})
         form.fields["day"].widget = forms.HiddenInput()
 
     return render(request, "main/create_event.html", {"form": form})
