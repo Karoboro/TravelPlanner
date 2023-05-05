@@ -1,8 +1,18 @@
+{% extends 'base.html' %}
+
 {% block content %}
-    <h2>Create New Trip</h2>
+    <header>
+        <h2>Create New Trip</h2>
+    </header>
+
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form %}
+        <div class="editField">
+            <span>{{ field.label_tag }}</span>
+            <span>{{ field }}</span>
+        </div>
+    {% endfor %}
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 {% endblock %}
