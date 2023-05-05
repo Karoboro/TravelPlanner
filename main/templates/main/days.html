@@ -25,7 +25,8 @@
         </div>
         {% endfor %}
         <div class="add-event">
-            <a class="add-event-link" href="add.html">+</a>
+            <a href="{% url 'create_event' day.pk %}"><span class="add-event-link">+</span></a>
+
         </div>
     </div>
 </main>
