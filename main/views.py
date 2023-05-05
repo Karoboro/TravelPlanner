@@ -43,7 +43,9 @@ def edit_trip(request, trip_id):
         form = TripForm(request.POST, instance=trip)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(
+                reverse("view_trip", kwargs={"trip_id": trip_id})
+            )
     else:
         form = TripForm(instance=trip)
 
@@ -81,7 +83,9 @@ def edit_day(request, day_id):
         form = DayForm(request.POST, instance=day)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(
+                reverse("view_trip", kwargs={"trip_id": day.trip.pk})
+            )
     else:
         form = DayForm(instance=day)
         event_list = [EventForm(instance=event) for event in event_list]
