@@ -397,6 +397,25 @@
     gap: 15px;
     flex-grow: 1;
   }
+
+  /* joshua */
+  .activityContainer {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    
+  }
+
+  .time {
+    color: #4a69bd;
+    font-weight: bold;
+    /* margin-right: 15px; */
+    flex:0
+  }
+/* 
+  .day {
+    border: 1px solid;
+  } */
+
   
   
   

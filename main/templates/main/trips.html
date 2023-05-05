@@ -25,7 +25,12 @@
           <h3><a href="{% url 'view_day' day.id %}">Day: {{ day.num }}</a></h3>
             <p>{{ day.description }}</p>
             {% for event in day.event_set.all %}
-            <p>{{ event }}</p>
+            <div class="activityContainer">
+              <div class="time">{{ event.time }}</div>
+              <div class="activityName">{{ event.name }}</div>
+              <!-- <p>{{ event.name }}</p>
+              <p>{{ event }}</p> -->
+            </div>
             {% endfor %}
         </div>
         {% endfor %}
