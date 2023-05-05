@@ -60,8 +60,9 @@ def create_day(request, trip_id):
     if request.method == "POST":
         data = request.POST.dict()
         data.update({"trip": Trip.objects.get(pk=trip_id)})
-        day_form = DayForm(data)
-        event_form = EventForm(data)
+        day_form = DayForm(data, prefix="day")
+        event_form = EventForm(data, prefix="event")
+        print(event_form)
         print(day_form.is_valid())
         print(event_form.is_valid())
         if day_form.is_valid() and event_form.is_valid():
@@ -70,7 +71,21 @@ def create_day(request, trip_id):
             return HttpResponseRedirect(
                 reverse("view_trip", kwargs={"trip_id": trip_id})
             )
-    return render(request, "main/create_day.html")
+        else:
+            return render(
+                request,
+                "main/create_day.html",
+                {"day_form": day_form, "event_form": event_form},
+            )
+    else:
+        day_form = DayForm(prefix="day")
+        event_form = EventForm(prefix="event")
+
+    return render(
+        request,
+        "main/create_day.html",
+        {"day_form": day_form, "event_form": event_form},
+    )
 
 
 def edit_day(request, day_id):
