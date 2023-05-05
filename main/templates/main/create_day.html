@@ -6,6 +6,9 @@
 </header>
 
 <main>
+    <div class="right-nav2">
+        <a href="{% url 'view_trip' form.initial.trip.pk %}" class="go-back">&larr; Go Back</a>
+    </div>
     <div class="container">
         <form method="post" class="event-form">
             {% csrf_token %}

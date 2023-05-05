@@ -60,6 +60,7 @@ def create_day(request, trip_id):
     if request.method == "POST":
         form = DayForm(request.POST)
         form.fields["trip"].widget = forms.HiddenInput()
+        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(
@@ -67,9 +68,8 @@ def create_day(request, trip_id):
             )
 
     else:
-        form = DayForm()
+        form = DayForm(initial={"trip": Trip.objects.get(pk=trip_id)})
         form.fields["trip"].widget = forms.HiddenInput()
-        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
 
     return render(request, "main/create_day.html", {"form": form})
 
@@ -108,9 +108,9 @@ def create_event(request, day_id):
             return HttpResponseRedirect(reverse("view_day", args=[day_id]))
     else:
         form = EventForm(initial={"day": Day.objects.get(pk=day_id)})
+        form.fields["day"].widget = forms.HiddenInput()
 
     return render(request, "main/create_event.html", {"form": form})
-
 
 
 def edit_event(request, event_id):
