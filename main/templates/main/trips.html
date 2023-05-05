@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if trip.pk %}
+  <header>
+    <h1>{{ trip }}</h1>
+  </header>
+{% else %}
 <header>
-    <h1>Trip Planner</h1>
+    <h1>BonVoyage Homepage</h1>
 </header>
+{% endif %}
 
 <div class="container2">
     <aside class="sidebar">
@@ -25,7 +31,12 @@
           <h3><a href="{% url 'view_day' day.id %}">Day: {{ day.num }}</a><a href="{% url 'edit_day' day.pk %}"><button class="edit-event-btn">Edit</button></a></h3>
             <p>{{ day.description }}</p>
             {% for event in day.event_set.all %}
-            <p>{{ event }}</p>
+            <div class="activityContainer">
+              <div class="time">{{ event.time }}</div>
+              <div class="activityName">{{ event.name }}</div>
+              <!-- <p>{{ event.name }}</p>
+              <p>{{ event }}</p> -->
+            </div>
             {% endfor %}
         </div>
         {% endfor %}

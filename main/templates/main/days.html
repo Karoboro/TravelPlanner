@@ -2,7 +2,7 @@
 
 {% block content %}
 <header>
-    <h1>Day</h1>
+    <h1>Day {{ day }}</h1>
 </header>
 <main>
     <div class="right-nav2">
@@ -11,11 +11,13 @@
     <div class="container">
         {% for event in day.event_set.all %}
         <div class="event-details">
-            <h2 class="event-name">{{ event.name }}</h2>
+            <h2 class="event-name">{{ event.name }} ({{ event.time }})</h2>
+            <!-- <span class="time">{{ event.time }}</span> -->
+            <span class="location">📍: {{ event.location }}</span>
             <div class="tags">
                 <span class="tag">{{ event.category }}</span>
             </div>
-            <span class="time">{{ event.time }}</span>
+            
             <h3>Details</h3>
             <ul class="subtasks">
                 <li class="subtask">Location: {{ event.location }}</li>
