@@ -60,7 +60,7 @@ def delete_trip(request, trip_id):
 
 def create_day(request, trip_id):
     if request.method == "POST":
-        form = DayForm(request.POST)
+        form = DayForm(request.POST, initial={"trip": Trip.objects.get(pk=trip_id)})
         form.fields["trip"].widget = forms.HiddenInput()
         form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
         if form.is_valid():
@@ -72,6 +72,7 @@ def create_day(request, trip_id):
     else:
         form = DayForm(initial={"trip": Trip.objects.get(pk=trip_id)})
         form.fields["trip"].widget = forms.HiddenInput()
+        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
 
     return render(request, "main/create_day.html", {"form": form})
 
