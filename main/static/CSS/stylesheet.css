@@ -267,6 +267,26 @@
     transition: background-color 0.3s ease;
   }
   
+  .edit-event-btn {
+    background-color: #0066cc;
+    border: none;
+    border-radius: 5%;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    height: 24px;
+    line-height: 20px;
+    margin-left: 3px;
+    outline: none;
+    text-align: center;
+  }
+  
+  .edit-event-btn:hover {
+    background-color: #0052a3;
+    transition: background-color 0.3s ease;
+  }
+  
   
   .delete-event-btn {
     background-color: #ff4d4d;

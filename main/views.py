@@ -97,16 +97,20 @@ def delete_day(request, day_id):
     return HttpResponseRedirect(reverse("index"))
 
 
-def create_event(request):
+def create_event(request, day_id):
+    day = get_object_or_404(Day, pk=day_id)
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("index"))
+            event = form.save(commit=False)
+            event.day = day
+            event.save()
+            return HttpResponseRedirect(reverse("view_day", args=[day_id]))
     else:
-        form = EventForm()
+        form = EventForm(initial={"day": Day.objects.get(pk=day_id)})
 
     return render(request, "main/create_event.html", {"form": form})
+
 
 
 def edit_event(request, event_id):
