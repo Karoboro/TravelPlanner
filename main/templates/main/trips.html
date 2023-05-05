@@ -23,12 +23,12 @@
 
     {% if trip.pk %}
     <main class="trip-details">
-        <h2>{{ trip.name }}</h2>
+        <h2>{{ trip.name }}<a href="{% url 'edit_trip' trip.pk %}"><button class="edit-event-btn">Edit</button></a></h2>
         <p>{{ trip.start_date }}</p>
         <p>{{ trip.description }}</p>
         {% for day in trip.day_set.all %}
         <div class="day">
-          <h3><a href="{% url 'view_day' day.id %}">Day: {{ day.num }}</a></h3>
+          <h3><a href="{% url 'view_day' day.id %}">Day: {{ day.num }}</a><a href="{% url 'edit_day' day.pk %}"><button class="edit-event-btn">Edit</button></a></h3>
             <p>{{ day.description }}</p>
             {% for event in day.event_set.all %}
             <div class="activityContainer">
