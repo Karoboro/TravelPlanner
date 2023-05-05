@@ -1,6 +1,6 @@
+from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.template import loader
 from django.urls import reverse
 
 from .forms import DayForm, EventForm, TripForm
@@ -58,34 +58,20 @@ def delete_trip(request, trip_id):
 
 def create_day(request, trip_id):
     if request.method == "POST":
-        data = request.POST.dict()
-        data.update({"trip": Trip.objects.get(pk=trip_id)})
-        day_form = DayForm(data, prefix="day")
-        event_form = EventForm(data, prefix="event")
-        print(event_form)
-        print(day_form.is_valid())
-        print(event_form.is_valid())
-        if day_form.is_valid() and event_form.is_valid():
-            day_form.save()
-            event_form.save()
+        form = DayForm(request.POST)
+        form.fields["trip"].widget = forms.HiddenInput()
+        if form.is_valid():
+            form.save()
             return HttpResponseRedirect(
                 reverse("view_trip", kwargs={"trip_id": trip_id})
             )
-        else:
-            return render(
-                request,
-                "main/create_day.html",
-                {"day_form": day_form, "event_form": event_form},
-            )
-    else:
-        day_form = DayForm(prefix="day")
-        event_form = EventForm(prefix="event")
 
-    return render(
-        request,
-        "main/create_day.html",
-        {"day_form": day_form, "event_form": event_form},
-    )
+    else:
+        form = DayForm()
+        form.fields["trip"].widget = forms.HiddenInput()
+        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
+
+    return render(request, "main/create_day.html", {"form": form})
 
 
 def edit_day(request, day_id):

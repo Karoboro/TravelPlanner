@@ -9,42 +9,7 @@
     <div class="container">
         <form method="post" class="event-form">
             {% csrf_token %}
-            {% for hidden in day_form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% for hidden in event_form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {{ day_form.non_field_errors }}
-            {{ event_form.non_field_errors }}
-            {{ day_form.num.errors }}
-            <label for="id_day-num">Day:</label>
-            <input type="number" id="id_day-num" name="day-num" min="1">
-            {{ event_form.name.errors }}
-            <label for="id_event-name">Title:</label>
-            <input type="text" id="id_event-name" name="event-name" placeholder="Enter event title" required>
-            {{ event_form.time.errors }}
-            <label for="id_event-time">Time:</label>
-            <input type="time" id="id_event-time" name="event-time" step="60" required>
-            {{ event_form.category.errors }}
-            <label for="id_event-category">Category:</label>
-            <select name="event-category" required="" id="id_event-category">
-                <option value="Accommodation">Accommodation</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Entertainment" selected>Entertainment</option>
-                <option value="Food">Food</option>
-                <option value="Misc">Misc</option>
-            </select>
-            {{ event_form.location.errors }}
-            <label for="id_event-location">Location:</label>
-            <input type="text" id="id_event-location" name="event-location" placeholder="Enter location" required>
-            {{ event_form.cost.errors }}
-            <label for="id_event-cost">Cost:</label>
-            <input type="number" id="id_event-cost" name="event-cost" step="0.01" value="">
-            {{ event_form.description.errors }}
-            <label for="id_event-description">Description:</label>
-            <textarea id="id_event-description" name="event-description" rows="4" placeholder="Description for the event"></textarea>
-
+            {{ form }}
             <button type="submit" class="save-btn">Save</button>
         </form>
     </div>
