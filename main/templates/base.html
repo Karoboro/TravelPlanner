@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'CSS/stylesheet.css' %}">
+  <title>{% block title %}Travel Planner{% endblock %}</title>
+</head>
+
+<body>
+  
+    <nav>
+      <div class="nav-content2">
+        <a href="{% url 'index' %}"><img src="{% static 'images/bonvoyage.png' %}" alt="BonVoyage logo" width="98" height="64" class="logo"></a>
+        <div class="right-nav2">
+          <a href="{% url 'create_trip' %}">New Trip</a>
+          <a href="#">Budget</a>
+          <a href="#">Login</a>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+
+
+    {% endblock %}
+
+  <footer>
+    <p>&copy; 2023 bonVoyage. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>

@@ -4,26 +4,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="trip.css">
+  <link rel="stylesheet" href="CSS/stylesheet.css">
   <title>Travel Planner</title>
 </head>
 
 <body>
-  <header>
+  
     <nav>
-      <div class="nav-content">
-        <img src="bonvoyage.png" alt="BonVoyage" class="logo">
-        <div class="right-nav">
+      <div class="nav-content2">
+        <a href="tripview.html"><img src="bonvoyage.png" alt="BonVoyage" class="logo"></a>
+        <div class="right-nav2">
           <a href="#">New Trip</a>
           <a href="#">Budget</a>
           <a href="#">Login</a>
         </div>
       </div>
     </nav>
-    
-  </header>
 
-  <div class="container">
+    <header><h1>Trip Planner</h1></header>
+    
+  
+
+  <div class="container2">
     <aside class="sidebar">
       <h2>Trips</h2>
       <ul>
@@ -38,17 +40,20 @@
       <div class="day">
         <h3>Day 1</h3>
         <p>Information about Day 1</p>
-        <a href="#">View</a>
+        <a href="hours.html">View</a>
       </div>
       <div class="day">
         <h3>Day 2</h3>
         <p>Information about Day 2</p>
-        <a href="#">View</a>
+        <a href="hours.html">View</a>
       </div>
       <!-- Add more days here -->
     </main>
   </div>
-  <button class="add-btn">+</button>
+  <a href="/create/day"><button class="add-btn">+</button></a>
+  <footer>
+    <p>&copy; 2023 bonVoyage. All rights reserved.</p>
+  </footer>
 </body>
 
 </html>

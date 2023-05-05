@@ -1,8 +1,21 @@
+{% extends 'base.html' %}
+
 {% block content %}
-    <h2>Create New Trip</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Create</button>
-    </form>
+<header>
+    <h1>Create New Trip</h1>
+</header>
+
+<main>
+    <div class="right-nav2">
+        <a href="{% url 'index' %}" class="go-back">&larr; Go Back</a>
+    </div>
+    <div class="container">
+        <form method="post" class="event-form">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="save-btn">Save</button>
+        </form>
+    </div>
+</main>
+
 {% endblock %}
