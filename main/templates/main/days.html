@@ -5,6 +5,9 @@
     <h1>Day</h1>
 </header>
 <main>
+    <div class="right-nav2">
+        <a href="{% url 'view_trip' day.trip.pk %}" class="go-back">&larr; Go Back</a>
+    </div>
     <div class="container">
         {% for event in day.event_set.all %}
         <div class="event-details">

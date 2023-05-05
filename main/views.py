@@ -1,6 +1,6 @@
+from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.template import loader
 from django.urls import reverse
 
 from .forms import DayForm, EventForm, TripForm
@@ -56,14 +56,20 @@ def delete_trip(request, trip_id):
     return HttpResponseRedirect(reverse("index"))
 
 
-def create_day(request):
+def create_day(request, trip_id):
     if request.method == "POST":
         form = DayForm(request.POST)
+        form.fields["trip"].widget = forms.HiddenInput()
+        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(
+                reverse("view_trip", kwargs={"trip_id": trip_id})
+            )
+
     else:
-        form = DayForm()
+        form = DayForm(initial={"trip": Trip.objects.get(pk=trip_id)})
+        form.fields["trip"].widget = forms.HiddenInput()
 
     return render(request, "main/create_day.html", {"form": form})
 
@@ -102,9 +108,9 @@ def create_event(request, day_id):
             return HttpResponseRedirect(reverse("view_day", args=[day_id]))
     else:
         form = EventForm(initial={"day": Day.objects.get(pk=day_id)})
+        form.fields["day"].widget = forms.HiddenInput()
 
     return render(request, "main/create_event.html", {"form": form})
-
 
 
 def edit_event(request, event_id):
