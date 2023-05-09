@@ -27,3 +27,18 @@ class TripModelTests(TestCase):
             trip = Trip(name="Trip to Somewhere", description="A testing trip")
             trip.save()
             trip.day_set.create(num=-1)
+
+    def test_invalid_event_cost(self):
+        with self.assertRaises(IntegrityError):
+            trip = Trip(name="Trip to Somewhere", description="A testing trip")
+            trip.save()
+            day = trip.day_set.create(num=1)
+            day.save()
+            day.event_set.create(
+                name="Ramen",
+                category="Food",
+                time="13:00",
+                location="Restaurant",
+                cost="-10",
+                description="Good ramen",
+            )
