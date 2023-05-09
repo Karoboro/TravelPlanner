@@ -2,7 +2,7 @@ from django.db.utils import IntegrityError
 from django.test import TestCase
 from django.test.utils import setup_test_environment
 
-from .models import Day
+from .models import Trip
 
 
 # Create your tests here.
@@ -14,3 +14,10 @@ class TripModelTests(TestCase):
         trip.day_set.create(num=2)
         trip.day_set.create(num=3)
         self.assertIs(len(trip), 3)
+
+    def test_invalid_duplicate_day(self):
+        with self.assertRaises(IntegrityError):
+            trip = Trip(name="Trip to Somewhere", description="A testing trip")
+            trip.save()
+            trip.day_set.create(num=1)
+            trip.day_set.create(num=1)
