@@ -21,3 +21,9 @@ class TripModelTests(TestCase):
             trip.save()
             trip.day_set.create(num=1)
             trip.day_set.create(num=1)
+
+    def test_invalid_neg_day_num(self):
+        with self.assertRaises(IntegrityError):
+            trip = Trip(name="Trip to Somewhere", description="A testing trip")
+            trip.save()
+            trip.day_set.create(num=-1)
