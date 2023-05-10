@@ -141,3 +141,18 @@ def delete_event(request, event_id):
     day_id = event.day.pk
     event.delete()
     return HttpResponseRedirect(reverse("view_day", kwargs={"day_id": day_id}))
+
+def budget_day(request, trip_id):
+    # access with budget/day/1
+    trip = get_object_or_404(Trip, pk=trip_id)
+    days = trip.day_set.all()
+    total = 0
+    day_expense = []
+
+    for day in days:
+        cost = sum([event.cost for event in day.event_set.all()])
+        day_expense.append((day, cost))
+        total += cost
+    # print(day)
+    # print(day_expense)
+    return render(request, "main/budget_day.html", {"day_expense": day_expense, "total": total})
