@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ trip.name }} - Budget Breakdown (Category View)</h1>
+    <h2>Total Cost: {{ total }}</h2>
+
+    {% for category, cost in trip.generate_expense_dict.items %}
+        <div>
+            <h3>{{ category }} - Total Cost: {{ cost }}</h3>
+            <ul>
+                {% for day in trip.day_set.all %}
+                    {% for event in day.event_set.all %}
+                        {% if event.category == category %}
+                            <li>{{ event.name }} - Cost: {{ event.cost }}</li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}
