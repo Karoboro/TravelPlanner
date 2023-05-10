@@ -33,7 +33,7 @@ class TripModelTests(TestCase):
             trip = Trip.objects.get(name="Trip to Somewhere")
             day = trip.day_set.create(num=1)
             day.save()
-            day.event_set.create(
+            event = day.event_set.create(
                 name="Ramen",
                 category="Food",
                 time="13:00",
@@ -41,6 +41,30 @@ class TripModelTests(TestCase):
                 cost="-10",
                 description="Good ramen",
             )
+
+    def test_delete_event(self):
+        trip = Trip.objects.get(name="Trip to Somewhere")
+        day = trip.day_set.create(num=1)
+        day.save()
+        event = day.event_set.create(
+            name="Ramen",
+            category="Food",
+            time="13:00",
+            location="Restaurant",
+            cost="20",
+            description="Good ramen",
+        )
+        self.assertIs(len(day), 1)
+        event.delete()
+        self.assertIs(len(day), 0)
+
+
+class ModelBudgetTests(TestCase):
+    fixtures = ["test_db.json"]
+
+    def test_budget_total(self):
+        trip = Trip.objects.get(pk=1)
+        self.assertEqual(sum(trip.generate_day_expense().values()), 535)
 
 
 class EndpointTests(TestCase):

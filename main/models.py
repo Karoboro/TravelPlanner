@@ -2,8 +2,7 @@
 from datetime import date
 
 from django.core.validators import MinValueValidator
-from django.db import models
-from django.db import transaction
+from django.db import models, transaction
 
 
 # Create your models here.
@@ -20,28 +19,24 @@ class Trip(models.Model):
         return self.day_set.count()
 
     def generate_expense_dict(self):
-        categorical_expense_summary = {
-            "Accommodation": 0,
-            "Transportation": 0,
-            "Entertainment": 0,
-            "Food": 0,
-            "Misc": 0,
-        }
+        categorical_expense_summary = {}
 
         for day in self.day_set.all():
             for event in day.event_set.all():
-                if event.category == "Accommodation":
-                    categorical_expense_summary["Accommodation"] += event.cost
-                elif event.category == "Transportation":
-                    categorical_expense_summary["Transportation"] += event.cost
-                elif event.category == "Entertainment":
-                    categorical_expense_summary["Entertainment"] += event.cost
-                elif event.category == "Food":
-                    categorical_expense_summary["Food"] += event.cost
+                if event.category in categorical_expense_summary:
+                    categorical_expense_summary[event.category] += event.cost
                 else:
-                    categorical_expense_summary["Misc"] += event.cost
+                    categorical_expense_summary[event.category] = event.cost
 
         return categorical_expense_summary
+
+    def generate_day_expense(self):
+        day_expense_summary = {}
+        for day in self.day_set.all():
+            day_expense_summary.update(
+                {str(day): sum([event.cost for event in day.event_set.all()])}
+            )
+        return day_expense_summary
 
 
 class Day(models.Model):
@@ -54,13 +49,12 @@ class Day(models.Model):
     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
     num = models.IntegerField(default=1, validators=[MinValueValidator(1)])
 
-
     def __str__(self):
         return str(self.num)
 
     def __len__(self):
         return self.event_set.count()
-    
+
     def save(self, *args, **kwargs):
         # this checks weather a day instance exists in the database
         if not self.pk:
@@ -68,18 +62,17 @@ class Day(models.Model):
         # call the original save method to save the instance
         super().save(*args, **kwargs)
 
-
     def delete(self, *args, **kwargs):
         """
         Problem:
         We want to delete a day, and re-number all days after it to fill the gap
-        
+
         Solution:
         _ We use transaction.atomic() to ensure transactions will happen or not at all
         _ We temporarily add a large constant to all 'num' fields to avoid conflict
         + this is because we can't have two days with the same number in the same trip
         _ We delete the day that we need to delete
-        _ We subtract one (& the constant) from updated days 
+        _ We subtract one (& the constant) from updated days
         + This will leave us with the correct sequence of days
         """
         # transaction.atomic() ensures that the transactions within all happen
@@ -87,7 +80,7 @@ class Day(models.Model):
         with transaction.atomic():
             # Retrieve the days that will need to be updated (within the same trip)
             days_to_update = Day.objects.filter(trip=self.trip, num__gt=self.num)
-            
+
             updated_days = []  # A list to store the updated Day objects
 
             # Temporarily add a large constant to all 'num' fields to avoid conflict
@@ -101,7 +94,6 @@ class Day(models.Model):
             for day in updated_days:
                 day.num -= 1001  # Subtract the added constant and one more to decrease the day number
                 day.save()
-
 
 
 class Event(models.Model):
