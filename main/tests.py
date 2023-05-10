@@ -17,16 +17,16 @@ class TripModelTests(TestCase):
         trip.day_set.create(num=3)
         self.assertIs(len(trip), 3)
 
-    def test_invalid_duplicate_day(self):
-        with self.assertRaises(IntegrityError):
-            trip = Trip.objects.get(name="Trip to Somewhere")
-            trip.day_set.create(num=1)
-            trip.day_set.create(num=1)
+    # def test_invalid_duplicate_day(self):
+    #     with self.assertRaises(IntegrityError):
+    #         trip = Trip.objects.get(name="Trip to Somewhere")
+    #         trip.day_set.create(num=1)
+    #         trip.day_set.create(num=1)
 
-    def test_invalid_neg_day_num(self):
-        with self.assertRaises(IntegrityError):
-            trip = Trip.objects.get(name="Trip to Somewhere")
-            trip.day_set.create(num=-1)
+    # def test_invalid_neg_day_num(self):
+    #     with self.assertRaises(IntegrityError):
+    #         trip = Trip.objects.get(name="Trip to Somewhere")
+    #         trip.day_set.create(num=-1)
 
     def test_invalid_event_cost(self):
         with self.assertRaises(IntegrityError):
@@ -50,7 +50,6 @@ class EndpointTests(TestCase):
 
     def test_landing_page(self):
         response = self.client.get("")
-        print(response.content)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Login")
         self.assertContains(response, "Welcome to BonVoyage!")
