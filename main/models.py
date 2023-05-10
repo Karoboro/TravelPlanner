@@ -17,6 +17,9 @@ class Trip(models.Model):
 
     def __len__(self):
         return self.day_set.count()
+    
+    def generate_expense_dict(self):
+        pass
 
 
 class Day(models.Model):
