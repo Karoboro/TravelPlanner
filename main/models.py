@@ -17,28 +17,31 @@ class Trip(models.Model):
 
     def __len__(self):
         return self.day_set.count()
-    
+
     def generate_expense_dict(self):
-        categorical_expense_summary = { "Accommodation": 0,
-                                        "Transportation": 0,
-                                        "Entertainment":0,
-                                        "Food": 0,
-                                        "Misc": 0, }
-        
+        categorical_expense_summary = {
+            "Accommodation": 0,
+            "Transportation": 0,
+            "Entertainment": 0,
+            "Food": 0,
+            "Misc": 0,
+        }
+
         for day in self.day_set.all():
             for event in day.event_set.all():
                 if event.category == "Accommodation":
-                    categorical_expense_summary["Accommodation"]+=event.cost
+                    categorical_expense_summary["Accommodation"] += event.cost
                 elif event.category == "Transportation":
-                    categorical_expense_summary["Transportation"]+=event.cost
+                    categorical_expense_summary["Transportation"] += event.cost
                 elif event.category == "Entertainment":
-                    categorical_expense_summary["Entertainment"]+=event.cost
+                    categorical_expense_summary["Entertainment"] += event.cost
                 elif event.category == "Food":
-                    categorical_expense_summary["Food"]+=event.cost
+                    categorical_expense_summary["Food"] += event.cost
                 else:
-                    categorical_expense_summary["Misc"]+=event.cost
+                    categorical_expense_summary["Misc"] += event.cost
 
         return categorical_expense_summary
+
 
 class Day(models.Model):
     class Meta:

@@ -142,6 +142,7 @@ def delete_event(request, event_id):
     event.delete()
     return HttpResponseRedirect(reverse("view_day", kwargs={"day_id": day_id}))
 
+
 def budget_day(request, trip_id):
     # access with budget/day/1
     trip = get_object_or_404(Trip, pk=trip_id)
@@ -155,7 +156,10 @@ def budget_day(request, trip_id):
         total += cost
     # print(day)
     # print(day_expense)
-    return render(request, "main/budget_day.html", {"day_expense": day_expense, "total": total})
+    return render(
+        request, "main/budget_day.html", {"day_expense": day_expense, "total": total}
+    )
+
 
 def budget_category(request, trip_id):
     trip = get_object_or_404(Trip, pk=trip_id)
