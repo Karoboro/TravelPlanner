@@ -46,12 +46,16 @@ class Day(models.Model):
 
 
     def delete(self, *args, **kwargs):
-        """We want to delete a day, and re-number all days after it to fill the gap
+        """
+        Problem:
+        We want to delete a day, and re-number all days after it to fill the gap
+        
+        Solution:
         _ We use transaction.atomic() to ensure transactions will happen or not at all
         _ We temporarily add a large constant to all 'num' fields to avoid conflict
         + this is because we can't have two days with the same number in the same trip
         _ We delete the day that we need to delete
-        _ We subtract one (+ the constant) from updated days 
+        _ We subtract one (& the constant) from updated days 
         + This will leave us with the correct sequence of days
         """
         # transaction.atomic() ensures that the transactions within all happen
