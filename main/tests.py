@@ -64,6 +64,7 @@ class ModelBudgetTests(TestCase):
 
     def test_budget_total(self):
         trip = Trip.objects.get(pk=1)
+        self.assertEqual(sum(trip.generate_day_expense().values()), 535)
 
 
 class EndpointTests(TestCase):
