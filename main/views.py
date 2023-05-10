@@ -156,3 +156,8 @@ def budget_day(request, trip_id):
     # print(day)
     # print(day_expense)
     return render(request, "main/budget_day.html", {"day_expense": day_expense, "total": total})
+
+def budget_category(request, trip_id):
+    trip = get_object_or_404(Trip, pk=trip_id)
+    total = sum(trip.generate_expense_dict().values())
+    return render(request, "main/budget_category.html", {"trip": trip, "total": total})
