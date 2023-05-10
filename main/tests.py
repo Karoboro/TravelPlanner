@@ -33,7 +33,7 @@ class TripModelTests(TestCase):
             trip = Trip.objects.get(name="Trip to Somewhere")
             day = trip.day_set.create(num=1)
             day.save()
-            day.event_set.create(
+            event = day.event_set.create(
                 name="Ramen",
                 category="Food",
                 time="13:00",
@@ -41,6 +41,22 @@ class TripModelTests(TestCase):
                 cost="-10",
                 description="Good ramen",
             )
+
+    def test_delete_event(self):
+        trip = Trip.objects.get(name="Trip to Somewhere")
+        day = trip.day_set.create(num=1)
+        day.save()
+        event = day.event_set.create(
+            name="Ramen",
+            category="Food",
+            time="13:00",
+            location="Restaurant",
+            cost="20",
+            description="Good ramen",
+        )
+        self.assertIs(len(day), 1)
+        event.delete()
+        self.assertIs(len(day), 0)
 
 
 class EndpointTests(TestCase):
