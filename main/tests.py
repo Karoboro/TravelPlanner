@@ -54,3 +54,8 @@ class EndpointTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Login")
         self.assertContains(response, "Welcome to BonVoyage!")
+
+    def test_trip_view(self):
+        response = self.client.get("/view/trip/1")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "A testing trip")
