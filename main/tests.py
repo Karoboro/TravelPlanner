@@ -59,6 +59,13 @@ class TripModelTests(TestCase):
         self.assertIs(len(day), 0)
 
 
+class ModelBudgetTests(TestCase):
+    fixtures = ["test_db.json"]
+
+    def test_budget_total(self):
+        trip = Trip.objects.get(pk=1)
+
+
 class EndpointTests(TestCase):
     def setUp(self):
         self.client = Client()
