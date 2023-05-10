@@ -25,16 +25,32 @@ def view_day(request, day_id):
     return render(request, "main/days.html", {"day": day})
 
 
+# def create_trip(request):
+#     if request.method == "POST":
+#         form = TripForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse("index"))
+#     else:
+#         form = TripForm()
+
+#     return render(request, "main/create_trip.html", {"form": form})
+
+
 def create_trip(request):
     if request.method == "POST":
         form = TripForm(request.POST)
         if form.is_valid():
-            form.save()
+            trip = form.save()
+            # Create the first Day for this Trip
+            # see comment in add_day on how create and save interact
+            Day.objects.create(trip=trip)  
             return HttpResponseRedirect(reverse("index"))
     else:
         form = TripForm()
 
     return render(request, "main/create_trip.html", {"form": form})
+
 
 
 def edit_trip(request, trip_id):
@@ -58,23 +74,34 @@ def delete_trip(request, trip_id):
     return HttpResponseRedirect(reverse("index"))
 
 
-def create_day(request, trip_id):
-    if request.method == "POST":
-        form = DayForm(request.POST, initial={"trip": Trip.objects.get(pk=trip_id)})
-        form.fields["trip"].widget = forms.HiddenInput()
-        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(
-                reverse("view_trip", kwargs={"trip_id": trip_id})
-            )
+# def create_day(request, trip_id):
+#     if request.method == "POST":
+#         form = DayForm(request.POST, initial={"trip": Trip.objects.get(pk=trip_id)})
+#         form.fields["trip"].widget = forms.HiddenInput()
+#         form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(
+#                 reverse("view_trip", kwargs={"trip_id": trip_id})
+#             )
 
-    else:
-        form = DayForm(initial={"trip": Trip.objects.get(pk=trip_id)})
-        form.fields["trip"].widget = forms.HiddenInput()
-        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
+#     else:
+#         form = DayForm(initial={"trip": Trip.objects.get(pk=trip_id)})
+#         form.fields["trip"].widget = forms.HiddenInput()
+#         form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
 
-    return render(request, "main/create_day.html", {"form": form})
+#     return render(request, "main/create_day.html", {"form": form})
+
+def add_day(request, trip_id):
+    trip = get_object_or_404(Trip, pk=trip_id)
+
+    if request.method == "GET":
+        # create does 2 things: create an object & save it in the database
+        # since we are overriding the save method, our custom save method is called
+        day = Day.objects.create(trip=trip)
+        return HttpResponseRedirect(reverse("view_trip", kwargs={"trip_id": trip_id}))
+        
+    return HttpResponseRedirect(reverse("index"))
 
 
 def edit_day(request, day_id):
