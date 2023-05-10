@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ trip.name }} - Budget Breakdown</h1>
+    <h2>Total Cost: {{ total }}</h2>
+
+    {% for day, cost in day_expense %}
+        <div>
+            <h3>Day {{ day.num }} - Total Cost: {{ cost }}</h3>
+            <ul>
+                {% for event in day.event_set.all %}
+                <li>{{ event.name }} - Cost: {{ event.cost }}</li>
+            {% endfor %}
+            
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}
