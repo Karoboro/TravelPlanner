@@ -1,5 +1,5 @@
 from django.db.utils import IntegrityError
-from django.test import TestCase
+from django.test import Client, TestCase
 from django.test.utils import setup_test_environment
 
 from .models import Trip
@@ -41,3 +41,16 @@ class TripModelTests(TestCase):
                 cost="-10",
                 description="Good ramen",
             )
+
+
+class EndpointTests(TestCase):
+    def setUp(self):
+        self.client = Client()
+        Trip.objects.create(name="Trip to Somewhere", description="A testing trip")
+
+    def test_landing_page(self):
+        response = self.client.get("")
+        print(response.content)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Login")
+        self.assertContains(response, "Welcome to BonVoyage!")
