@@ -50,7 +50,6 @@ class EndpointTests(TestCase):
 
     def test_landing_page(self):
         response = self.client.get("")
-        print(response.content)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Login")
         self.assertContains(response, "Welcome to BonVoyage!")
