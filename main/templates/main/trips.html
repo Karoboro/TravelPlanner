@@ -38,9 +38,10 @@
               <p>{{ event }}</p> -->
             </div>
             {% endfor %}
+            <a href="{% url 'add_day' trip.id %}"><button class="add-btn">+</button></a>
         </div>
         {% endfor %}
-        <a href="{% url 'add_day' trip.id %}"><button class="add-btn">+</button></a>
+        
       </main>
       {% else %}
       <main class="trip-details">
