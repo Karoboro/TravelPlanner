@@ -117,3 +117,15 @@ class FixtureEndpointTests(TestCase):
         }
         response = self.client.post(f"/create/event/{day.pk}", event)
         self.assertEqual(day.event_set.count(), 1)
+
+    def test_edit_trip(self):
+        response = self.client.get("/view/trip/1")
+        self.assertContains(response, "Trip to Barcelona")
+        trip = {
+            "name": "Trip to Test Change",
+            "description": "A 5-day trip to Barcelona, exploring its beautiful architecture and vibrant culture",
+            "start_date": "2023-05-10",
+        }
+        response = self.client.post("/edit/trip/1", trip)
+        response = self.client.get("/view/trip/1")
+        self.assertContains(response, "Trip to Test Change")
