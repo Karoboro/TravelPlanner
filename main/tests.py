@@ -129,3 +129,10 @@ class FixtureEndpointTests(TestCase):
         response = self.client.post("/edit/trip/1", trip)
         response = self.client.get("/view/trip/1")
         self.assertContains(response, "Trip to Test Change")
+
+    def test_delete_trip(self):
+        self.assertEqual(Trip.objects.count(), 2)
+        self.assertEqual(Event.objects.count(), 28)
+        response = self.client.get("/delete/trip/1")
+        self.assertEqual(Trip.objects.count(), 1)
+        self.assertEqual(Event.objects.count(), 14)
