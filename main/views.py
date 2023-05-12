@@ -44,13 +44,12 @@ def create_trip(request):
             trip = form.save()
             # Create the first Day for this Trip
             # see comment in add_day on how create and save interact
-            Day.objects.create(trip=trip)  
+            Day.objects.create(trip=trip)
             return HttpResponseRedirect(reverse("index"))
     else:
         form = TripForm()
 
     return render(request, "main/create_trip.html", {"form": form})
-
 
 
 def edit_trip(request, trip_id):
@@ -92,6 +91,7 @@ def delete_trip(request, trip_id):
 
 #     return render(request, "main/create_day.html", {"form": form})
 
+
 def add_day(request, trip_id):
     trip = get_object_or_404(Trip, pk=trip_id)
 
@@ -100,7 +100,7 @@ def add_day(request, trip_id):
         # since we are overriding the save method, our custom save method is called
         day = Day.objects.create(trip=trip)
         return HttpResponseRedirect(reverse("view_trip", kwargs={"trip_id": trip_id}))
-        
+
     return HttpResponseRedirect(reverse("index"))
 
 
@@ -169,9 +169,11 @@ def delete_event(request, event_id):
     event.delete()
     return HttpResponseRedirect(reverse("view_day", kwargs={"day_id": day_id}))
 
+
 def view_budget_page(request):
     trips = Trip.objects.all()
-    return render(request, "main/budget_day.html", {"trips":trips})
+    return render(request, "main/budget_day.html", {"trips": trips})
+
 
 def budget_day(request, trip_id):
     trips = Trip.objects.all()
@@ -188,7 +190,9 @@ def budget_day(request, trip_id):
     # print(day)
     # print(day_expense)
     return render(
-        request, "main/budget_day.html", {"day_expense": day_expense, "total": total, "trips":trips, "trip":trip}
+        request,
+        "main/budget_day.html",
+        {"day_expense": day_expense, "total": total, "trips": trips, "trip": trip},
     )
 
 
@@ -196,4 +200,8 @@ def budget_category(request, trip_id):
     trips = Trip.objects.all()
     trip = get_object_or_404(Trip, pk=trip_id)
     total = sum(trip.generate_expense_dict().values())
-    return render(request, "main/budget_category.html", {"trip": trip, "total": total, "trips":trips})
+    return render(
+        request,
+        "main/budget_category.html",
+        {"trip": trip, "total": total, "trips": trips},
+    )

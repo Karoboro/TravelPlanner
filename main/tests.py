@@ -2,7 +2,7 @@ from django.db.utils import IntegrityError
 from django.test import Client, TestCase
 from django.test.utils import setup_test_environment
 
-from .models import Trip
+from .models import Event, Trip
 
 
 # Create your tests here.
@@ -69,7 +69,6 @@ class ModelBudgetTests(TestCase):
 
 class EndpointTests(TestCase):
     def setUp(self):
-        self.client = Client()
         Trip.objects.create(name="Trip to Somewhere", description="A testing trip")
 
     def test_landing_page(self):
@@ -82,3 +81,20 @@ class EndpointTests(TestCase):
         response = self.client.get("/view/trip/1")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "A testing trip")
+
+
+class FixtureEndpointTests(TestCase):
+    fixtures = ["test_db.json"]
+
+    def test_create_day(self):
+        self.assertEqual(Trip.objects.count(), 2)
+        trip = {
+            "name": "Trip to Somewhere",
+            "description": "A testing trip",
+            "start_date": "2023-06-01",
+        }
+        response = self.client.post("/create/trip", trip)
+        self.assertEqual(Trip.objects.count(), 3)
+        self.assertEqual(Trip.objects.get(pk=3).day_set.count(), 1)
+        response = self.client.get("")
+        self.assertContains(response, "Trip to Somewhere")
