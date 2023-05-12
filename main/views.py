@@ -43,7 +43,9 @@ def edit_trip(request, trip_id):
         form = TripForm(request.POST, instance=trip)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(
+                reverse("view_trip", kwargs={"trip_id": trip_id})
+            )
     else:
         form = TripForm(instance=trip)
 
@@ -58,7 +60,7 @@ def delete_trip(request, trip_id):
 
 def create_day(request, trip_id):
     if request.method == "POST":
-        form = DayForm(request.POST)
+        form = DayForm(request.POST, initial={"trip": Trip.objects.get(pk=trip_id)})
         form.fields["trip"].widget = forms.HiddenInput()
         form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
         if form.is_valid():
@@ -70,6 +72,7 @@ def create_day(request, trip_id):
     else:
         form = DayForm(initial={"trip": Trip.objects.get(pk=trip_id)})
         form.fields["trip"].widget = forms.HiddenInput()
+        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
 
     return render(request, "main/create_day.html", {"form": form})
 
@@ -81,7 +84,9 @@ def edit_day(request, day_id):
         form = DayForm(request.POST, instance=day)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(
+                reverse("view_trip", kwargs={"trip_id": day.trip.pk})
+            )
     else:
         form = DayForm(instance=day)
         event_list = [EventForm(instance=event) for event in event_list]
@@ -93,8 +98,9 @@ def edit_day(request, day_id):
 
 def delete_day(request, day_id):
     day = get_object_or_404(Day, pk=day_id)
+    trip_id = day.trip.pk
     day.delete()
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("view_trip", kwargs={"trip_id": trip_id}))
 
 
 def create_event(request, day_id):
@@ -120,7 +126,9 @@ def edit_event(request, event_id):
         form.fields["day"].widget = forms.HiddenInput()
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(
+                reverse("view_day", kwargs={"day_id": event.day.pk})
+            )
     else:
         form = EventForm(instance=event)
         form.fields["day"].widget = forms.HiddenInput()
@@ -130,5 +138,26 @@ def edit_event(request, event_id):
 
 def delete_event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
+    day_id = event.day.pk
     event.delete()
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("view_day", kwargs={"day_id": day_id}))
+
+def budget_day(request, trip_id):
+    # access with budget/day/1
+    trip = get_object_or_404(Trip, pk=trip_id)
+    days = trip.day_set.all()
+    total = 0
+    day_expense = []
+
+    for day in days:
+        cost = sum([event.cost for event in day.event_set.all()])
+        day_expense.append((day, cost))
+        total += cost
+    # print(day)
+    # print(day_expense)
+    return render(request, "main/budget_day.html", {"day_expense": day_expense, "total": total})
+
+def budget_category(request, trip_id):
+    trip = get_object_or_404(Trip, pk=trip_id)
+    total = sum(trip.generate_expense_dict().values())
+    return render(request, "main/budget_category.html", {"trip": trip, "total": total})
