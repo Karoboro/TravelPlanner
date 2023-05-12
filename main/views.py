@@ -171,6 +171,7 @@ def delete_event(request, event_id):
 
 
 def budget_day(request, trip_id):
+    trips = Trip.objects.all()
     # access with budget/day/1
     trip = get_object_or_404(Trip, pk=trip_id)
     days = trip.day_set.all()
@@ -184,11 +185,12 @@ def budget_day(request, trip_id):
     # print(day)
     # print(day_expense)
     return render(
-        request, "main/budget_day.html", {"day_expense": day_expense, "total": total}
+        request, "main/budget_day.html", {"day_expense": day_expense, "total": total, "trips":trips, "trip":trip}
     )
 
 
 def budget_category(request, trip_id):
+    trips = Trip.objects.all()
     trip = get_object_or_404(Trip, pk=trip_id)
     total = sum(trip.generate_expense_dict().values())
-    return render(request, "main/budget_category.html", {"trip": trip, "total": total})
+    return render(request, "main/budget_category.html", {"trip": trip, "total": total, "trips":trips})
