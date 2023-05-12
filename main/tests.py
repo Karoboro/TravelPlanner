@@ -2,7 +2,7 @@ from django.db.utils import IntegrityError
 from django.test import Client, TestCase
 from django.test.utils import setup_test_environment
 
-from .models import Trip
+from .models import Event, Trip
 
 
 # Create your tests here.
@@ -69,7 +69,6 @@ class ModelBudgetTests(TestCase):
 
 class EndpointTests(TestCase):
     def setUp(self):
-        self.client = Client()
         Trip.objects.create(name="Trip to Somewhere", description="A testing trip")
 
     def test_landing_page(self):
@@ -82,3 +81,58 @@ class EndpointTests(TestCase):
         response = self.client.get("/view/trip/1")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "A testing trip")
+
+
+class FixtureEndpointTests(TestCase):
+    fixtures = ["test_db.json"]
+
+    def test_create_day(self):
+        self.assertEqual(Trip.objects.count(), 2)
+        trip = {
+            "name": "Trip to Somewhere",
+            "description": "A testing trip",
+            "start_date": "2023-06-01",
+        }
+        response = self.client.post("/create/trip", trip)
+        self.assertEqual(Trip.objects.count(), 3)
+        self.assertEqual(Trip.objects.get(pk=3).day_set.count(), 1)
+        response = self.client.get("")
+        self.assertContains(response, "Trip to Somewhere")
+
+    def test_create_day_event(self):
+        trip = Trip.objects.get(pk=1)
+        self.assertEqual(trip.day_set.count(), 5)
+        response = self.client.get("/add/day/1")
+        self.assertEqual(trip.day_set.count(), 6)
+        day = trip.day_set.get(num=6)
+        self.assertEqual(day.event_set.count(), 0)
+        event = {
+            "day": day.pk,
+            "name": "Ramen",
+            "category": "Food",
+            "time": "13:00",
+            "location": "Restaurant",
+            "cost": "20",
+            "description": "Good ramen",
+        }
+        response = self.client.post(f"/create/event/{day.pk}", event)
+        self.assertEqual(day.event_set.count(), 1)
+
+    def test_edit_trip(self):
+        response = self.client.get("/view/trip/1")
+        self.assertContains(response, "Trip to Barcelona")
+        trip = {
+            "name": "Trip to Test Change",
+            "description": "A 5-day trip to Barcelona, exploring its beautiful architecture and vibrant culture",
+            "start_date": "2023-05-10",
+        }
+        response = self.client.post("/edit/trip/1", trip)
+        response = self.client.get("/view/trip/1")
+        self.assertContains(response, "Trip to Test Change")
+
+    def test_delete_trip(self):
+        self.assertEqual(Trip.objects.count(), 2)
+        self.assertEqual(Event.objects.count(), 28)
+        response = self.client.get("/delete/trip/1")
+        self.assertEqual(Trip.objects.count(), 1)
+        self.assertEqual(Event.objects.count(), 14)
