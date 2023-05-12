@@ -169,6 +169,9 @@ def delete_event(request, event_id):
     event.delete()
     return HttpResponseRedirect(reverse("view_day", kwargs={"day_id": day_id}))
 
+def view_budget_page(request):
+    trips = Trip.objects.all()
+    return render(request, "main/budget_day.html", {"trips":trips})
 
 def budget_day(request, trip_id):
     trips = Trip.objects.all()
