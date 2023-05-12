@@ -25,11 +25,26 @@ def view_day(request, day_id):
     return render(request, "main/days.html", {"day": day})
 
 
+# def create_trip(request):
+#     if request.method == "POST":
+#         form = TripForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse("index"))
+#     else:
+#         form = TripForm()
+
+#     return render(request, "main/create_trip.html", {"form": form})
+
+
 def create_trip(request):
     if request.method == "POST":
         form = TripForm(request.POST)
         if form.is_valid():
-            form.save()
+            trip = form.save()
+            # Create the first Day for this Trip
+            # see comment in add_day on how create and save interact
+            Day.objects.create(trip=trip)
             return HttpResponseRedirect(reverse("index"))
     else:
         form = TripForm()
@@ -58,23 +73,35 @@ def delete_trip(request, trip_id):
     return HttpResponseRedirect(reverse("index"))
 
 
-def create_day(request, trip_id):
-    if request.method == "POST":
-        form = DayForm(request.POST, initial={"trip": Trip.objects.get(pk=trip_id)})
-        form.fields["trip"].widget = forms.HiddenInput()
-        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(
-                reverse("view_trip", kwargs={"trip_id": trip_id})
-            )
+# def create_day(request, trip_id):
+#     if request.method == "POST":
+#         form = DayForm(request.POST, initial={"trip": Trip.objects.get(pk=trip_id)})
+#         form.fields["trip"].widget = forms.HiddenInput()
+#         form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(
+#                 reverse("view_trip", kwargs={"trip_id": trip_id})
+#             )
 
-    else:
-        form = DayForm(initial={"trip": Trip.objects.get(pk=trip_id)})
-        form.fields["trip"].widget = forms.HiddenInput()
-        form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
+#     else:
+#         form = DayForm(initial={"trip": Trip.objects.get(pk=trip_id)})
+#         form.fields["trip"].widget = forms.HiddenInput()
+#         form.fields["trip"].initial = Trip.objects.get(pk=trip_id)
 
-    return render(request, "main/create_day.html", {"form": form})
+#     return render(request, "main/create_day.html", {"form": form})
+
+
+def add_day(request, trip_id):
+    trip = get_object_or_404(Trip, pk=trip_id)
+
+    if request.method == "GET":
+        # create does 2 things: create an object & save it in the database
+        # since we are overriding the save method, our custom save method is called
+        day = Day.objects.create(trip=trip)
+        return HttpResponseRedirect(reverse("view_trip", kwargs={"trip_id": trip_id}))
+
+    return HttpResponseRedirect(reverse("index"))
 
 
 def edit_day(request, day_id):
@@ -142,7 +169,14 @@ def delete_event(request, event_id):
     event.delete()
     return HttpResponseRedirect(reverse("view_day", kwargs={"day_id": day_id}))
 
+
+def view_budget_page(request):
+    trips = Trip.objects.all()
+    return render(request, "main/budget_day.html", {"trips": trips})
+
+
 def budget_day(request, trip_id):
+    trips = Trip.objects.all()
     # access with budget/day/1
     trip = get_object_or_404(Trip, pk=trip_id)
     days = trip.day_set.all()
@@ -155,9 +189,19 @@ def budget_day(request, trip_id):
         total += cost
     # print(day)
     # print(day_expense)
-    return render(request, "main/budget_day.html", {"day_expense": day_expense, "total": total})
+    return render(
+        request,
+        "main/budget_day.html",
+        {"day_expense": day_expense, "total": total, "trips": trips, "trip": trip},
+    )
+
 
 def budget_category(request, trip_id):
+    trips = Trip.objects.all()
     trip = get_object_or_404(Trip, pk=trip_id)
     total = sum(trip.generate_expense_dict().values())
-    return render(request, "main/budget_category.html", {"trip": trip, "total": total})
+    return render(
+        request,
+        "main/budget_category.html",
+        {"trip": trip, "total": total, "trips": trips},
+    )
