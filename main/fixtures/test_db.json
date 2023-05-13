@@ -1,0 +1,394 @@
+[
+  {
+    "model": "main.trip",
+    "pk": 1,
+    "fields": {
+      "name": "Trip to Barcelona",
+      "description": "A 5-day trip to Barcelona, exploring its beautiful architecture and vibrant culture",
+      "start_date": "2023-05-10"
+    }
+  },
+  {
+    "model": "main.trip",
+    "pk": 2,
+    "fields": {
+      "name": "Trip to Japan",
+      "description": "A 3-day trip to Japan, exploring its rich history and vibrant culture",
+      "start_date": "2023-05-10"
+    }
+  },
+  { "model": "main.day", "pk": 1, "fields": { "trip": 1, "num": 1 } },
+  { "model": "main.day", "pk": 2, "fields": { "trip": 1, "num": 2 } },
+  { "model": "main.day", "pk": 3, "fields": { "trip": 1, "num": 3 } },
+  { "model": "main.day", "pk": 4, "fields": { "trip": 1, "num": 4 } },
+  { "model": "main.day", "pk": 5, "fields": { "trip": 1, "num": 5 } },
+  { "model": "main.day", "pk": 6, "fields": { "trip": 2, "num": 1 } },
+  { "model": "main.day", "pk": 7, "fields": { "trip": 2, "num": 2 } },
+  { "model": "main.day", "pk": 8, "fields": { "trip": 2, "num": 3 } },
+  { "model": "main.day", "pk": 9, "fields": { "trip": 2, "num": 4 } },
+  { "model": "main.day", "pk": 10, "fields": { "trip": 2, "num": 5 } },
+  {
+    "model": "main.event",
+    "pk": 1,
+    "fields": {
+      "day": 1,
+      "name": "Visit La Sagrada Familia",
+      "category": "Entertainment",
+      "time": "10:00:00",
+      "location": "La Sagrada Familia, Barcelona",
+      "cost": 25.0,
+      "description": "Visit the world-famous La Sagrada Familia, designed by architect Antoni Gaudí"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 2,
+    "fields": {
+      "day": 1,
+      "name": "Lunch at Can Solé",
+      "category": "Food",
+      "time": "13:00:00",
+      "location": "Can Solé, Barcelona",
+      "cost": 30.0,
+      "description": "Enjoy a delicious Spanish lunch at Can Solé, a popular local seafood restaurant"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 3,
+    "fields": {
+      "day": 1,
+      "name": "Explore Park Güell",
+      "category": "Entertainment",
+      "time": "16:00:00",
+      "location": "Park Güell, Barcelona",
+      "cost": 10.0,
+      "description": "Discover Park Güell, another masterpiece designed by Antoni Gaudí"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 4,
+    "fields": {
+      "day": 2,
+      "name": "Visit Casa Batlló",
+      "category": "Entertainment",
+      "time": "10:00:00",
+      "location": "Casa Batlló, Barcelona",
+      "cost": 25.0,
+      "description": "Experience the beautiful architecture of Casa Batlló, designed by Antoni Gaudí"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 5,
+    "fields": {
+      "day": 2,
+      "name": "Lunch at Bar Cañete",
+      "category": "Food",
+      "time": "13:00:00",
+      "location": "Bar Cañete, Barcelona",
+      "cost": 35.0,
+      "description": "Enjoy a delicious Spanish lunch at Bar Cañete, a popular local tapas bar"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 6,
+    "fields": {
+      "day": 2,
+      "name": "Visit Picasso Museum",
+      "category": "Entertainment",
+      "time": "15:00:00",
+      "location": "Picasso Museum, Barcelona",
+      "cost": 15.0,
+      "description": "Explore the extensive collection of artworks by Pablo Picasso at the Picasso Museum"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 7,
+    "fields": {
+      "day": 3,
+      "name": "Visit Camp Nou",
+      "category": "Entertainment",
+      "time": "10:00:00",
+      "location": "Camp Nou, Barcelona",
+      "cost": 30.0,
+      "description": "Take a tour of Camp Nou, the iconic stadium of FC Barcelona"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 8,
+    "fields": {
+      "day": 3,
+      "name": "Lunch at Cervecería Catalana",
+      "category": "Food",
+      "time": "13:00:00",
+      "location": "Cervecería Catalana, Barcelona",
+      "cost": 30.0,
+      "description": "Enjoy a delicious Spanish lunch at Cervecería Catalana, a popular local tapas bar"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 9,
+    "fields": {
+      "day": 3,
+      "name": "Explore La Rambla",
+      "category": "Entertainment",
+      "time": "15:00:00",
+      "location": "La Rambla, Barcelona",
+      "cost": 0.0,
+      "description": "Stroll down the famous La Rambla, a bustling pedestrian street with shops, cafes, and street performers"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 10,
+    "fields": {
+      "day": 4,
+      "name": "Check in at Hotel Arts Barcelona",
+      "category": "Accommodation",
+      "time": "12:00:00",
+      "location": "Hotel Arts Barcelona",
+      "cost": 200.0,
+      "description": "Enjoy a luxurious stay at Hotel Arts Barcelona with a beautiful view of the city"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 11,
+    "fields": {
+      "day": 4,
+      "name": "Take a metro to the Magic Fountain of Montjuïc",
+      "category": "Transportation",
+      "time": "18:00:00",
+      "location": "Barcelona Metro",
+      "cost": 5.0,
+      "description": "Experience the efficient metro system of Barcelona"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 12,
+    "fields": {
+      "day": 4,
+      "name": "Visit Magic Fountain of Montjuïc",
+      "category": "Entertainment",
+      "time": "20:00:00",
+      "location": "Magic Fountain of Montjuïc, Barcelona",
+      "cost": 0.0,
+      "description": "Enjoy a spectacular display of color, light, motion, music and water acrobatics"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 13,
+    "fields": {
+      "day": 5,
+      "name": "Take a taxi to the airport",
+      "category": "Transportation",
+      "time": "10:00:00",
+      "location": "Barcelona Airport",
+      "cost": 30.0,
+      "description": "Return journey to the airport"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 14,
+    "fields": {
+      "day": 5,
+      "name": "Buy souvenirs at Duty Free",
+      "category": "Misc",
+      "time": "12:00:00",
+      "location": "Barcelona Airport",
+      "cost": 100.0,
+      "description": "Get some souvenirs and gifts for your loved ones at Duty Free"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 15,
+    "fields": {
+      "day": 6,
+      "name": "Visit Senso-ji Temple",
+      "category": "Entertainment",
+      "time": "10:00:00",
+      "location": "Senso-ji Temple, Tokyo",
+      "cost": 10.0,
+      "description": "Visit the oldest temple in Tokyo, Senso-ji Temple, located in the Asakusa district"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 16,
+    "fields": {
+      "day": 6,
+      "name": "Lunch at Sushi Dai",
+      "category": "Food",
+      "time": "13:00:00",
+      "location": "Sushi Dai, Tokyo",
+      "cost": 50.0,
+      "description": "Enjoy an authentic sushi experience at Sushi Dai, a famous sushi restaurant in Tsukiji Fish Market"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 17,
+    "fields": {
+      "day": 6,
+      "name": "Explore Akihabara",
+      "category": "Entertainment",
+      "time": "15:00:00",
+      "location": "Akihabara, Tokyo",
+      "cost": 0.0,
+      "description": "Discover the vibrant Akihabara district, known for its electronics, gaming, and anime culture"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 18,
+    "fields": {
+      "day": 7,
+      "name": "Visit Meiji Shrine",
+      "category": "Entertainment",
+      "time": "10:00:00",
+      "location": "Meiji Shrine, Tokyo",
+      "cost": 0.0,
+      "description": "Explore the serene Meiji Shrine, dedicated to the deified spirits of Emperor Meiji and Empress Shoken"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 19,
+    "fields": {
+      "day": 7,
+      "name": "Lunch at Tonkatsu Maisen",
+      "category": "Food",
+      "time": "13:00:00",
+      "location": "Tonkatsu Maisen, Tokyo",
+      "cost": 25.0,
+      "description": "Savor delicious tonkatsu at Tonkatsu Maisen, a renowned tonkatsu restaurant in Tokyo"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 20,
+    "fields": {
+      "day": 7,
+      "name": "Visit Odaiba",
+      "category": "Entertainment",
+      "time": "15:00:00",
+      "location": "Odaiba, Tokyo",
+      "cost": 20.0,
+      "description": "Enjoy the sights and attractions of Odaiba, a popular shopping and entertainment district on a man-made island in Tokyo Bay"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 21,
+    "fields": {
+      "day": 8,
+      "name": "Visit Ueno Park",
+      "category": "Entertainment",
+      "time": "10:00:00",
+      "location": "Ueno Park, Tokyo",
+      "cost": 0.0,
+      "description": "Stroll through Ueno Park, a spacious public park featuring museums, a zoo, and several major temples and shrines"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 22,
+    "fields": {
+      "day": 8,
+      "name": "Lunch at Ramen Street",
+      "category": "Food",
+      "time": "13:00:00",
+      "location": "Tokyo Ramen Street, Tokyo",
+      "cost": 15.0,
+      "description": "Try some of the best ramen in Tokyo at Tokyo Ramen Street, located in the basement of Tokyo Station"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 23,
+    "fields": {
+      "day": 8,
+      "name": "Explore Shibuya Crossing",
+      "category": "Entertainment",
+      "time": "15:00:00",
+      "location": "Shibuya Crossing, Tokyo",
+      "cost": 0.0,
+      "description": "Witness the world-famous Shibuya Crossing, one of the busiest pedestrian intersections in the world"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 24,
+    "fields": {
+      "day": 9,
+      "name": "Check in at The Ritz-Carlton, Tokyo",
+      "category": "Accommodation",
+      "time": "14:00:00",
+      "location": "The Ritz-Carlton, Tokyo",
+      "cost": 350.0,
+      "description": "Stay at The Ritz-Carlton, Tokyo, an opulent hotel offering a stunning view of the city"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 25,
+    "fields": {
+      "day": 9,
+      "name": "Take a metro to Roppongi Hills",
+      "category": "Transportation",
+      "time": "16:00:00",
+      "location": "Tokyo Metro",
+      "cost": 3.0,
+      "description": "Navigate through Tokyo's comprehensive metro system"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 26,
+    "fields": {
+      "day": 9,
+      "name": "Explore Roppongi Hills",
+      "category": "Entertainment",
+      "time": "17:00:00",
+      "location": "Roppongi Hills, Tokyo",
+      "cost": 0.0,
+      "description": "Experience the modern side of Tokyo at Roppongi Hills, a complex with shops, restaurants, and a museum"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 27,
+    "fields": {
+      "day": 10,
+      "name": "Take a taxi to the airport",
+      "category": "Transportation",
+      "time": "10:00:00",
+      "location": "Narita International Airport",
+      "cost": 50.0,
+      "description": "Return journey to the airport"
+    }
+  },
+  {
+    "model": "main.event",
+    "pk": 28,
+    "fields": {
+      "day": 10,
+      "name": "Buy souvenirs at Duty Free",
+      "category": "Misc",
+      "time": "12:00:00",
+      "location": "Narita International Airport",
+      "cost": 100.0,
+      "description": "Get some souvenirs and gifts for your loved ones at Duty Free"
+    }
+  }
+]

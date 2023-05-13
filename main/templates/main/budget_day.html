@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if trip.pk %}
+    <header>
+        <h1>{{ trip }} - Expense Summary</h1>
+    </header>
+
+{% else %}
+    <header>
+        <h1>Expense Summary</h1>
+    </header>
+{% endif %}
+    
+<!-- side bar -->
+<div class="container2">
+    <aside class="sidebar">
+        <h2>Trips</h2>
+        <ul>
+        {% for trip_item in trips %}
+            <li><a href="{% url 'budget_day' trip_item.id %}">{{ trip_item.name }}</a></li>
+        {% endfor %}
+        </ul>
+    </aside>
+
+    {% if trip.pk %}
+        <main class="trip-budget">
+            <div class="budget">
+                <div class="tab">
+                    <a class="active">Day View</a>
+                    <a href="{% url 'budget_category' trip.pk %}">Category View</a>
+                </div>
+                
+                <div class="trip-total">
+                    <div class="total-box">
+                        <h2>Trip Total</h2>
+                        <p>${{ total }}</p>
+                    </div>
+                </div>
+
+                {% for day, cost in day_expense %}
+                    <div class="b-day">
+                        <div class="inner-b">
+                            <div class="budget-event">
+                                <h3>Day {{ day.num }}</h3>
+                                <h3 class="price">{{ cost }}</h3>
+                            </div>
+                            {% for event in day.event_set.all %}
+                                <div class="budget-event">
+                                    <p class="expense">{{ event.name }}</p>
+                                    <p class="price">{{ event.cost }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+        </main>
+
+    {% else %}
+        <main class="trip-details">
+        <h2>Expense Summary</h2>
+        <h3>Please select a trip.</h3>
+        </main>
+    {% endif %}
+
+</div>
+
+    <!-- <h1>{{ trip.name }} - Budget Breakdown</h1>
+    <h2>Total Cost: {{ total }}</h2>
+
+    {% for day, cost in day_expense %}
+        <div>
+            <h3>Day {{ day.num }} - Total Cost: {{ cost }}</h3>
+            <ul>
+                {% for event in day.event_set.all %}
+                <li>{{ event.name }} - Cost: {{ event.cost }}</li>
+            {% endfor %}
+            
+            </ul>
+        </div>
+    {% endfor %} -->
+{% endblock %}
