@@ -21,7 +21,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--background-color);
-    padding: 1rem;
+    padding: 0.1rem;
   
     width: 98%;
     top: 0;
@@ -66,10 +66,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     background-image: linear-gradient(180deg, var(--accent-color) 0%, var(--main-color) 100%);
     color: #fff;
-    height: 13vh;
+    height: min-content;
     margin-bottom: 1rem;
     /* clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%); */
   }
@@ -86,7 +85,9 @@
   }
   
   .go-back:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #4a69bd;
+    color: #fff;
+    text-decoration: none;
   }
   
   .container {
@@ -149,11 +150,6 @@
     text-align: center;
   }
   
-  
-  .go-back:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    text-decoration: none;
-  }
   
   .tag:hover {
     background-color: #5a5a5a;
@@ -340,6 +336,7 @@
   }
   
   .trip-details {
+  
     flex-grow: 1;
     margin-left: 20px;
     padding: 15px;
@@ -369,7 +366,7 @@
   }
   
   .add-btn {
-    position: fixed;
+    position: absolute;
     right: 20px;
     bottom: 20px;
     background-color: #4a69bd;
@@ -402,6 +399,7 @@
   
   
   .container2 {
+    position: relative;
     display: flex;
     height: calc(100% - 60px);
   }
@@ -416,6 +414,13 @@
   .right-nav2 {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    flex-grow: 1;
+  }
+  .left-nav{
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
     gap: 15px;
     flex-grow: 1;
