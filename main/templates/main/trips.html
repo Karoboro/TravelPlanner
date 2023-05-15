@@ -1,52 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if trip.pk %}
-  <header>
-    <h1>{{ trip }}</h1>
-  </header>
-{% else %}
-<header>
-    <h1>BonVoyage Homepage</h1>
-</header>
-{% endif %}
-
-<div class="container2">
-    <aside class="sidebar">
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3">
       <h2>Trips</h2>
-      <ul>
+      <ul class="list-group mb-4">
         {% for trip_item in trips %}
-        <li><a href="{% url 'view_trip' trip_item.id %}">{{ trip_item.name }}</a></li>
+        <li class="list-group-item">
+          <a href="{% url 'view_trip' trip_item.id %}">{{ trip_item.name }}</a>
+        </li>
         {% endfor %}
       </ul>
-    </aside>
-
-    {% if trip.pk %}
-    <main class="trip-details">
-        <h2>{{ trip.name }}<a href="{% url 'edit_trip' trip.pk %}"><button class="edit-event-btn">Edit</button></a></h2>
+      <a href="{% url 'create_trip' %}" class="btn btn-primary">Add New Trip</a>
+    </div>
+    <div class="col-md-9">
+      {% if trip.pk %}
+        <h1>{{ trip }}</h1>
+        <h2 class="my-4">{{ trip.name }}<a href="{% url 'edit_trip' trip.pk %}"><button class="btn btn-outline-primary ml-2">Edit</button></a></h2>
         <p>{{ trip.start_date }}</p>
         <p>{{ trip.description }}</p>
         {% for day in trip.day_set.all %}
-        <div class="day">
-          <h3><a href="{% url 'view_day' day.id %}">Day: {{ day.num }}</a><a href="{% url 'edit_day' day.pk %}"><button class="edit-event-btn">Edit</button></a></h3>
-            <p>{{ day.description }}</p>
+        <div class="card my-3">
+          <div class="card-body">
+            <h3 class="card-title">Day: {{ day.num }}<a href="{% url 'edit_day' day.pk %}"><button class="btn btn-outline-primary ml-2">Edit</button></a></h3>
+            <p class="card-text">{{ day.description }}</p>
             {% for event in day.event_set.all %}
-            <div class="activityContainer">
-              <div class="time">{{ event.time }}</div>
-              <div class="activityName">{{ event.name }}</div>
-              <!-- <p>{{ event.name }}</p>
-              <p>{{ event }}</p> -->
-            </div>
+            <h4>{{ event.time }}</h4>
+            <p>{{ event.name }}</p>
             {% endfor %}
+          </div>
         </div>
         {% endfor %}
-        <a href="{% url 'add_day' trip.id %}"><button class="add-btn">+</button></a>
-      </main>
+        <a href="{% url 'add_day' trip.id %}"><button class="btn btn-primary">Add Day</button></a>
       {% else %}
-      <main class="trip-details">
         <h2>Welcome to BonVoyage!</h2>
         <h3>Please select or create a trip.</h3>
-      </main>
       {% endif %}
+    </div>
+  </div>
 </div>
 {% endblock %}
