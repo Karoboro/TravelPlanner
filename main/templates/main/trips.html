@@ -59,6 +59,17 @@
       </div>
 
       {% endfor %}
+      <div class="col">
+        <a href="{% url 'add_day' trip.id %}" class="text-decoration-none">
+          <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg">
+            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1 justify-content-center align-items-center">
+              <i class="bi bi-plus-lg fs-1"></i>
+              <h2 class="mt-2 mb-4 display-6 lh-1 fw-bold text-center">Add Day</h2>
+            </div>
+          </div>
+        </a>
+      </div>
+      
     </div>
     {% else %}
     <h2>Welcome to BonVoyage!</h2>
