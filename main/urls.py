@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from . import views
 
@@ -20,4 +20,6 @@ urlpatterns = [
     path(
         "budget/category/<int:trip_id>", views.budget_category, name="budget_category"
     ),
+    path("accounts/login/", views.LoginView.as_view(), name="login"),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]

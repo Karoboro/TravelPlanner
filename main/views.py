@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -7,10 +8,15 @@ from .forms import DayForm, EventForm, TripForm
 from .models import Day, Event, Trip
 
 
+class LoginView(LoginView):
+    next_page = "/"
+    redirect_authenticated_user = True
+
+
 # Create your views here.
 def index(request):
     trips = Trip.objects.all()  # Fetch all the trips
-    context = {"trips": trips}
+    context = {"trips": trips, "user": request.user}
     return render(request, "main/trips.html", context)
 
 
