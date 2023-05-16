@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 from django.test import Client, TestCase
 from django.test.utils import setup_test_environment
@@ -69,6 +70,7 @@ class ModelBudgetTests(TestCase):
 
 class EndpointTests(TestCase):
     def setUp(self):
+        User.objects.create_user("admin", "", "admin")
         Trip.objects.create(name="Trip to Somewhere", description="A testing trip")
 
     def test_landing_page(self):
@@ -78,6 +80,9 @@ class EndpointTests(TestCase):
         self.assertContains(response, "Welcome to BonVoyage!")
 
     def test_trip_view(self):
+        response = self.client.post(
+            "/accounts/login/", {"username": "admin", "password": "admin"}
+        )
         response = self.client.get("/view/trip/1")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "A testing trip")
@@ -87,6 +92,10 @@ class FixtureEndpointTests(TestCase):
     fixtures = ["test_db.json"]
 
     def test_create_day(self):
+        response = self.client.post(
+            "/accounts/login/", {"username": "admin", "password": "admin"}
+        )
+
         self.assertEqual(Trip.objects.count(), 2)
         trip = {
             "name": "Trip to Somewhere",
@@ -100,6 +109,10 @@ class FixtureEndpointTests(TestCase):
         self.assertContains(response, "Trip to Somewhere")
 
     def test_create_day_event(self):
+        response = self.client.post(
+            "/accounts/login/", {"username": "admin", "password": "admin"}
+        )
+
         trip = Trip.objects.get(pk=1)
         self.assertEqual(trip.day_set.count(), 5)
         response = self.client.get("/add/day/1")
@@ -119,6 +132,10 @@ class FixtureEndpointTests(TestCase):
         self.assertEqual(day.event_set.count(), 1)
 
     def test_edit_trip(self):
+        response = self.client.post(
+            "/accounts/login/", {"username": "admin", "password": "admin"}
+        )
+
         response = self.client.get("/view/trip/1")
         self.assertContains(response, "Trip to Barcelona")
         trip = {
@@ -131,6 +148,10 @@ class FixtureEndpointTests(TestCase):
         self.assertContains(response, "Trip to Test Change")
 
     def test_delete_trip(self):
+        response = self.client.post(
+            "/accounts/login/", {"username": "admin", "password": "admin"}
+        )
+
         self.assertEqual(Trip.objects.count(), 2)
         self.assertEqual(Event.objects.count(), 28)
         response = self.client.get("/delete/trip/1")
