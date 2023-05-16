@@ -1,15 +1,16 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UsernameField
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from .models import Day, Event, Trip
 
 
 class UserForm(UserCreationForm):
+    username = forms.EmailField()
+
     class Meta:
         model = User
-        fields = ["username", "email", "first_name", "last_name"]
-        field_classes = {"username": UsernameField}
+        fields = ["username", "first_name", "last_name"]
 
 
 class TripForm(forms.ModelForm):
