@@ -18,8 +18,9 @@ def create_user(request):
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
-            print(form.is_valid())
-            form.save()
+            user = form.save(commit=False)
+            user.email = user.username
+            user.save()
             return HttpResponseRedirect(reverse("index"))
     else:
         form = UserForm()
