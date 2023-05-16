@@ -18,8 +18,11 @@ class TripForm(forms.ModelForm):
         model = Trip
         # fields = "__all__"
         fields = ["name", "start_date", "description"]
-        widgets = {"start_date": forms.DateInput(attrs={"type": "date"})}
-
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "start_date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
+            "description": forms.Textarea(attrs={"class": "form-control"}),
+        }
 
 class DayForm(forms.ModelForm):
     trip = forms.ModelChoiceField(queryset=Trip.objects.all(), empty_label=None)
