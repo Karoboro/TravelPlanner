@@ -1,28 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if trip.pk %}
-    <header>
-        <h1>{{ trip }} - Expense Summary</h1>
-    </header>
-
-{% else %}
-    <header>
-        <h1>Expense Summary</h1>
-    </header>
-{% endif %}
     
 <!-- side bar -->
-<div class="container2">
-    <aside class="sidebar">
+<div class="d-flex flex-grow-1">
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark " style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <svg class="bi me-2" width="40" height="32">
+        <use xlink:href="#bootstrap"></use>
+      </svg>
+      <span class="fs-4">Your Trips</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      {% for trip_item in trips %}
+      <li class="nav-item">
+        <a href="{% url 'budget_day' trip_item.id %}" class="nav-link text-white">
+          <i class="bi bi-geo-alt-fill me-2"></i>
+          {{ trip_item.name }}
+        </a>
+      </li>
+      {% endfor %}
+      <hr>
+    </ul>
+    </div>
+
+
+<div class="container px-4 py-3" id="hanging-icons">
+    <!-- <aside class="sidebar">
         <h2>Trips</h2>
         <ul>
         {% for trip_item in trips %}
             <li><a href="{% url 'budget_day' trip_item.id %}">{{ trip_item.name }}</a></li>
         {% endfor %}
         </ul>
-    </aside>
+    </aside> -->
+    {% if trip.pk %}
+        <header>
+            <h1>{{ trip }} - Expense Summary</h1>
+        </header>
 
+    {% else %}
+        <header>
+            <h1>Expense Summary</h1>
+        </header>
+    {% endif %}
+
+    
     {% if trip.pk %}
         <main class="trip-budget">
             <div class="budget">
@@ -65,18 +89,5 @@
 
 </div>
 
-    <!-- <h1>{{ trip.name }} - Budget Breakdown</h1>
-    <h2>Total Cost: {{ total }}</h2>
-
-    {% for day, cost in day_expense %}
-        <div>
-            <h3>Day {{ day.num }} - Total Cost: {{ cost }}</h3>
-            <ul>
-                {% for event in day.event_set.all %}
-                <li>{{ event.name }} - Cost: {{ event.cost }}</li>
-            {% endfor %}
-            
-            </ul>
-        </div>
-    {% endfor %} -->
+</div>
 {% endblock %}
