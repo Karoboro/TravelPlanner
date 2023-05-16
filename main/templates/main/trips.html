@@ -21,12 +21,13 @@
         </a>
       </li>
       {% endfor %}
-    </ul>
-    <hr>
-    <div class="d-flex align-items-center">
-      <a href="{% url 'create_trip' %}" class="btn btn-primary">Add New Trip</a>
+      <hr>
+      <div class="d-flex align-items-center">
+        <a href="{% url 'create_trip' %}" class="btn btn-primary">Add New Trip</a>
+      </div>
     </div>
-  </div>
+    </ul>
+
 
   <div class="container px-4 py-5" id="hanging-icons">
     {% if trip.pk %}

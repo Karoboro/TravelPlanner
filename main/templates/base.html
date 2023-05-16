@@ -13,44 +13,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.7.2/font/bootstrap-icons.min.css">
 </head>
 
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none"
-        href="{% url 'index' %}">
-        <span class="fs-4">Bon</span>
-        <img src="{% static 'images/pin_logo.png' %}" alt="BonVoyage logo" height="32" class="logo">
-        <span class="fs-4">oyage</span>
-      </a>
-
-      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'create_trip' %}">New Trip</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'view_budget_page' %}">Budget</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">Login</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
 
 
 
 <body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none"
+          href="{% url 'index' %}">
+          <span class="fs-4">Bon</span>
+          <img src="{% static 'images/pin_logo.png' %}" alt="BonVoyage logo" height="32" class="logo">
+          <span class="fs-4">oyage</span>
+        </a>
+  
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'index' %}">Trip</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'view_budget_page' %}">Budget</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  
 
 
+  {% block content %}
+  {% endblock %}
 
-  {% block content %}{% endblock %}
-
-  {% load static %}
-
-  {% load static %}
 
   <footer class="footer mt-auto d-flex flex-wrap justify-content-between align-items-center py-3 my-4 bg-primary text-white">
       <div class="col-md-4 d-flex align-items-center justify-content-md-center">
