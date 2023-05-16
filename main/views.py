@@ -5,13 +5,26 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .forms import DayForm, EventForm, TripForm
+from .forms import DayForm, EventForm, TripForm, UserForm
 from .models import Day, Event, Trip
 
 
 class LoginView(LoginView):
     next_page = "/"
     redirect_authenticated_user = True
+
+
+def create_user(request):
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            print(form.is_valid())
+            form.save()
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        form = UserForm()
+
+    return render(request, "registration/create_user.html", {"form": form})
 
 
 # Create your views here.

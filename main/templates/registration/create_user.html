@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+    <h1>Create New User</h1>
+</header>
+
+<main>
+    <div class="left-nav">
+        <a href="{% url 'index' %}" class="go-back">&larr; Go Back</a>
+    </div>
+    <div class="container">
+        <form method="post" class="event-form">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="save-btn">Save</button>
+        </form>
+    </div>
+</main>
+
+{% endblock %}

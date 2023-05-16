@@ -20,6 +20,7 @@ urlpatterns = [
     path(
         "budget/category/<int:trip_id>", views.budget_category, name="budget_category"
     ),
+    path("accounts/create_user/", views.create_user, name="create_user"),
     path("accounts/login/", views.LoginView.as_view(), name="login"),
     path("accounts/", include("django.contrib.auth.urls")),
 ]
