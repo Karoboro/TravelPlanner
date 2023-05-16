@@ -9,7 +9,10 @@ from .models import Event, Trip
 # Create your tests here.
 class TripModelTests(TestCase):
     def setUp(self):
-        Trip.objects.create(name="Trip to Somewhere", description="A testing trip")
+        user = User.objects.create_user("admin", "", "admin")
+        Trip.objects.create(
+            name="Trip to Somewhere", description="A testing trip", user=user
+        )
 
     def test_number_of_days(self):
         trip = Trip.objects.get(name="Trip to Somewhere")
@@ -70,8 +73,10 @@ class ModelBudgetTests(TestCase):
 
 class EndpointTests(TestCase):
     def setUp(self):
-        User.objects.create_user("admin", "", "admin")
-        Trip.objects.create(name="Trip to Somewhere", description="A testing trip")
+        user = User.objects.create_user("admin", "", "admin")
+        Trip.objects.create(
+            name="Trip to Somewhere", description="A testing trip", user=user
+        )
 
     def test_landing_page(self):
         response = self.client.get("")
