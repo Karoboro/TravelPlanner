@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -20,12 +21,14 @@ def index(request):
     return render(request, "main/trips.html", context)
 
 
+@login_required
 def view_trip(request, trip_id):
     trips = Trip.objects.all()
     trip = get_object_or_404(Trip, pk=trip_id)
     return render(request, "main/trips.html", {"trip": trip, "trips": trips})
 
 
+@login_required
 def view_day(request, day_id):
     day = get_object_or_404(Day, pk=day_id)
     return render(request, "main/days.html", {"day": day})
@@ -43,6 +46,7 @@ def view_day(request, day_id):
 #     return render(request, "main/create_trip.html", {"form": form})
 
 
+@login_required
 def create_trip(request):
     if request.method == "POST":
         form = TripForm(request.POST)
@@ -58,6 +62,7 @@ def create_trip(request):
     return render(request, "main/create_trip.html", {"form": form})
 
 
+@login_required
 def edit_trip(request, trip_id):
     trip = Trip.objects.get(pk=trip_id)
     if request.method == "POST":
@@ -73,6 +78,7 @@ def edit_trip(request, trip_id):
     return render(request, "main/edit_trip.html", {"form": form})
 
 
+@login_required
 def delete_trip(request, trip_id):
     trip = get_object_or_404(Trip, pk=trip_id)
     trip.delete()
@@ -98,6 +104,7 @@ def delete_trip(request, trip_id):
 #     return render(request, "main/create_day.html", {"form": form})
 
 
+@login_required
 def add_day(request, trip_id):
     trip = get_object_or_404(Trip, pk=trip_id)
 
@@ -110,6 +117,7 @@ def add_day(request, trip_id):
     return HttpResponseRedirect(reverse("index"))
 
 
+@login_required
 def edit_day(request, day_id):
     day = Day.objects.get(pk=day_id)
     event_list = day.event_set.all()
@@ -129,6 +137,7 @@ def edit_day(request, day_id):
     )
 
 
+@login_required
 def delete_day(request, day_id):
     day = get_object_or_404(Day, pk=day_id)
     trip_id = day.trip.pk
@@ -136,6 +145,7 @@ def delete_day(request, day_id):
     return HttpResponseRedirect(reverse("view_trip", kwargs={"trip_id": trip_id}))
 
 
+@login_required
 def create_event(request, day_id):
     day = get_object_or_404(Day, pk=day_id)
     if request.method == "POST":
@@ -152,6 +162,7 @@ def create_event(request, day_id):
     return render(request, "main/create_event.html", {"form": form})
 
 
+@login_required
 def edit_event(request, event_id):
     event = Event.objects.get(pk=event_id)
     if request.method == "POST":
@@ -169,6 +180,7 @@ def edit_event(request, event_id):
     return render(request, "main/edit_event.html", {"form": form})
 
 
+@login_required
 def delete_event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     day_id = event.day.pk
@@ -176,11 +188,13 @@ def delete_event(request, event_id):
     return HttpResponseRedirect(reverse("view_day", kwargs={"day_id": day_id}))
 
 
+@login_required
 def view_budget_page(request):
     trips = Trip.objects.all()
     return render(request, "main/budget_day.html", {"trips": trips})
 
 
+@login_required
 def budget_day(request, trip_id):
     trips = Trip.objects.all()
     # access with budget/day/1
@@ -202,6 +216,7 @@ def budget_day(request, trip_id):
     )
 
 
+@login_required
 def budget_category(request, trip_id):
     trips = Trip.objects.all()
     trip = get_object_or_404(Trip, pk=trip_id)
