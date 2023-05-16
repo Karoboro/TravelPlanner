@@ -1,11 +1,20 @@
 [
   {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "admin",
+      "password": "pbkdf2_sha256$600000$cd7zKjsfoBJXzaLTNFQ59X$FJO4toZD+xEpYJCs6+9HWFvl2ttZx27TPSW9OrbywI0="
+    }
+  },
+  {
     "model": "main.trip",
     "pk": 1,
     "fields": {
       "name": "Trip to Barcelona",
       "description": "A 5-day trip to Barcelona, exploring its beautiful architecture and vibrant culture",
-      "start_date": "2023-05-10"
+      "start_date": "2023-05-10",
+      "user": 1
     }
   },
   {
@@ -14,7 +23,8 @@
     "fields": {
       "name": "Trip to Japan",
       "description": "A 3-day trip to Japan, exploring its rich history and vibrant culture",
-      "start_date": "2023-05-10"
+      "start_date": "2023-05-10",
+      "user": 1
     }
   },
   { "model": "main.day", "pk": 1, "fields": { "trip": 1, "num": 1 } },
