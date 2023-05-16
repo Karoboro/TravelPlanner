@@ -48,8 +48,8 @@
       {% for day in trip.day_set.all %}
       
       <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg">
-          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+        <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow-lg">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-dark">
             <h2 class=" mt-0 mb-4 display-6 lh-1 fw-bold"> Day {{ day.num }}</h2>
             {% for event in day.event_set.all %}
             <h4>{{ event.time }}</h4>
