@@ -39,7 +39,8 @@ def index(request):
 
 @login_required
 def view_trip(request, trip_id):
-    trips = Trip.objects.all()
+    user = request.user
+    trips = user.trip_set.all()
     trip = get_object_or_404(trips, pk=trip_id)
     return render(request, "main/trips.html", {"trip": trip, "trips": trips})
 
