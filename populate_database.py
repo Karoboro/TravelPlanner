@@ -1,12 +1,12 @@
 import os
 
 import django
-from django.contrib.auth.models import User
 from django.utils import timezone
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "TravelPlanner.settings")
 django.setup()
 
+from django.contrib.auth.models import User
 from main.models import Day, Event, Trip
 
 
