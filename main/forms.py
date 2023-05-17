@@ -37,7 +37,12 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = ["day", "name", "category", "time", "location", "cost", "description"]
         widgets = {
-            "time": forms.TimeInput(attrs={"type": "time"}),
-            "cost": forms.NumberInput(attrs={"Step": 0.01, "min": 0}),
-            "description": forms.Textarea(attrs={"rows": 4}),
+            "day": forms.Select(attrs={'class': 'form-control'}),
+            "name": forms.TextInput(attrs={'class': 'form-control'}),
+            "category": forms.TextInput(attrs={'class': 'form-control'}),
+            "time": forms.TimeInput(attrs={"type": "time", 'class': 'form-control'}),
+            "location": forms.TextInput(attrs={'class': 'form-control'}),
+            "cost": forms.NumberInput(attrs={"Step": 0.01, "min": 0, 'class': 'form-control'}),
+            "description": forms.Textarea(attrs={"rows": 4, 'class': 'form-control'}),
         }
+
