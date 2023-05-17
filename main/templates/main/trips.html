@@ -13,12 +13,12 @@
     <ul class="nav nav-pills flex-column mb-auto">
       {% for trip_item in trips %}
       <li class="nav-item">
-        <a href="{% url 'view_trip' trip_item.id %}" class="nav-link text-white">
+        <a href="{% url 'view_trip' trip_item.id %}" class="nav-link text-white {% if trip.id == trip_item.id %}active{% endif %}">
           <i class="bi bi-geo-alt-fill me-2"></i>
           {{ trip_item.name }}
         </a>
       </li>
-      {% endfor %}
+    {% endfor %}    
       <hr>
       <div class="d-flex justify-content-center">
         <a href="{% url 'create_trip' %}" class="btn btn-primary">
