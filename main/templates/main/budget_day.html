@@ -1,28 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if trip.pk %}
-    <header>
-        <h1>{{ trip }} - Expense Summary</h1>
-    </header>
-
-{% else %}
-    <header>
-        <h1>Expense Summary</h1>
-    </header>
-{% endif %}
     
 <!-- side bar -->
-<div class="container2">
-    <aside class="sidebar">
-        <h2>Trips</h2>
-        <ul>
-        {% for trip_item in trips %}
-            <li><a href="{% url 'budget_day' trip_item.id %}">{{ trip_item.name }}</a></li>
-        {% endfor %}
-        </ul>
-    </aside>
+<div class="d-flex flex-grow-1">
+  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark " style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <svg class="bi me-2" width="40" height="32">
+        <use xlink:href="#bootstrap"></use>
+      </svg>
+      <span class="fs-4">Your Trips</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      {% for trip_item in trips %}
+      <li class="nav-item">
+        <a href="{% url 'budget_day' trip_item.id %}" class="nav-link text-white">
+          <i class="bi bi-geo-alt-fill me-2"></i>
+          {{ trip_item.name }}
+        </a>
+      </li>
+      {% endfor %}
+      <hr>
+    </ul>
+    </div>
 
+
+<div class="container px-4 py-3" id="hanging-icons">
+    {% if trip.pk %}
+        <header>
+            <h1 class="text-center">{{ trip }} - Expense Summary</h1>
+        </header>
+
+    {% else %}
+        <header class="text-center">
+            <h1>Expense Summary</h1>
+        </header>
+    {% endif %}
+
+    
     {% if trip.pk %}
         <main class="trip-budget">
             <div class="budget">
@@ -31,29 +47,33 @@
                     <a href="{% url 'budget_category' trip.pk %}">Category View</a>
                 </div>
                 
-                <div class="trip-total">
-                    <div class="total-box">
+                <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow-lg my-4">
+                    <div class="d-flex flex-column align-items-center h-100 p-5 text-dark">
                         <h2>Trip Total</h2>
-                        <p>${{ total }}</p>
+                        <div class="">${{ total }}</div>
                     </div>
                 </div>
 
+                <!-- <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-1"> -->
                 {% for day, cost in day_expense %}
-                    <div class="b-day">
-                        <div class="inner-b">
-                            <div class="budget-event">
+                    <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow-lg mb-4">
+                        <div class="d-flex flex-column h-100 p-5 text-dark">
+                            <div class="d-flex justify-content-between pb-3">
                                 <h3>Day {{ day.num }}</h3>
-                                <h3 class="price">{{ cost }}</h3>
+                                <span class="">${{ cost }}</span>
                             </div>
                             {% for event in day.event_set.all %}
-                                <div class="budget-event">
-                                    <p class="expense">{{ event.name }}</p>
-                                    <p class="price">{{ event.cost }}</p>
-                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        {{ event.name }}
+                                        <span>${{ event.cost }}</span>
+                                    </li>
+                                </ul>
                             {% endfor %}
                         </div>
                     </div>
                 {% endfor %}
+                <!-- </div> -->
         </main>
 
     {% else %}
@@ -65,18 +85,5 @@
 
 </div>
 
-    <!-- <h1>{{ trip.name }} - Budget Breakdown</h1>
-    <h2>Total Cost: {{ total }}</h2>
-
-    {% for day, cost in day_expense %}
-        <div>
-            <h3>Day {{ day.num }} - Total Cost: {{ cost }}</h3>
-            <ul>
-                {% for event in day.event_set.all %}
-                <li>{{ event.name }} - Cost: {{ event.cost }}</li>
-            {% endfor %}
-            
-            </ul>
-        </div>
-    {% endfor %} -->
+</div>
 {% endblock %}
