@@ -74,8 +74,12 @@ class ModelBudgetTests(TestCase):
 class EndpointTests(TestCase):
     def setUp(self):
         user = User.objects.create_user("admin", "", "admin")
+        user2 = User.objects.create_user("user2", "", "user2")
         Trip.objects.create(
             name="Trip to Somewhere", description="A testing trip", user=user
+        )
+        Trip.objects.create(
+            name="User2 Trip", description="admin user should not see this", user=user2
         )
 
     def test_landing_page(self):
@@ -91,6 +95,13 @@ class EndpointTests(TestCase):
         response = self.client.get("/view/trip/1")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "A testing trip")
+
+    def test_user_based_view(self):
+        response = self.client.post(
+            "/accounts/login/", {"username": "admin", "password": "admin"}
+        )
+        response = self.client.get("/view/trip/2")
+        self.assertEqual(response.status_code, 404)
 
 
 class FixtureEndpointTests(TestCase):
