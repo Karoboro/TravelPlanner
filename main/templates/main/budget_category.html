@@ -42,11 +42,20 @@
     {% if trip.pk %}
         <main class="trip-budget">
             <div class="budget">
-                <div class="tab">
+                <!-- <div class="tab">
                     <a href="{% url 'budget_day' trip.pk %}">Day View</a>
                     <a class="active">Category View</a>
-                </div>
-                
+                </div> -->
+                <ul class="nav nav-tabs mt-4">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'budget_day' trip.pk %}">Day View</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page">Category View</a>
+                      </li>
+                </ul>
+
+
                 <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow-lg my-4">
                     <div class="d-flex flex-column align-items-center h-100 p-5 text-dark">
                         <h2>Trip Total</h2>
