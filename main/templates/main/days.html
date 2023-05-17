@@ -36,8 +36,8 @@
             </div>
         </div>
         {% endfor %}
-        <div class="card h-100 overflow-hidden text-dark bg-light rounded-5 shadow-lg mb-4 d-flex justify-content-center align-items-center" style="max-width: 600px;">
-            <div class="p-4" style="width: 100%;">
+        <div class="card h-100 overflow-hidden text-dark bg-light rounded-5 shadow-lg mb-4" style="max-width: 600px;">
+            <div class="p-4 d-flex justify-content-center align-items-center" style="width: 100%;">
                 <div class="text-center py-3">
                     <a href="{% url 'create_event' day.pk %}" title="create new event" class="text-decoration-none">
                         <i class="bi bi-plus-circle-fill fs-1"></i>
@@ -46,6 +46,8 @@
                 </div>
             </div>
         </div>
+        
+
         
         
     </div>
