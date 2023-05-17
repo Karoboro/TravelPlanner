@@ -15,7 +15,7 @@
     <ul class="nav nav-pills flex-column mb-auto">
       {% for trip_item in trips %}
       <li class="nav-item">
-        <a href="{% url 'budget_day' trip_item.id %}" class="nav-link text-white">
+        <a href="{% url 'budget_day' trip_item.id %}" class="nav-link text-white {% if trip.id == trip_item.id %}active{% endif %}">
           <i class="bi bi-geo-alt-fill me-2"></i>
           {{ trip_item.name }}
         </a>
