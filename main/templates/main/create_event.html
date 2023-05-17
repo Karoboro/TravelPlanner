@@ -1,21 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<header>
-    <h1>Create New Event</h1>
-</header>
+<main class="container">
 
-<main>
-    <div class="left-nav">
-        <a href="{% url 'view_day' form.initial.day.pk %}" class="go-back">&larr; Go Back</a>
+    <div class="d-flex justify-content-left">
+        <a href="{% url 'view_day' form.initial.day.pk %}" class="btn btn-primary mt-4 mb-4">&larr; Go Back</a>
+
     </div>
-    <div class="container">
+    
+    <div class="card w-75 mx-auto p-4">
+        <header class="py-1">
+            <h1 class="text-center">Create New Event</h1>
+        </header>
+    
         <form method="post" class="event-form">
             {% csrf_token %}
-            {{ form }}
-            <button type="submit" class="save-btn">Save</button>
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
         </form>
     </div>
 </main>
-
 {% endblock %}
