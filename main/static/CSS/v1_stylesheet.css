@@ -21,7 +21,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--background-color);
-    padding: 1rem;
+    padding: 0.1rem;
   
     width: 98%;
     top: 0;
@@ -58,10 +58,7 @@
     color: #333; /* Dark text color */
   }
   
-  /* Updated Right Nav */
-  
-  
-  /* Updated Nav Item on hover */
+ 
   
   
   
@@ -69,10 +66,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     background-image: linear-gradient(180deg, var(--accent-color) 0%, var(--main-color) 100%);
     color: #fff;
-    height: 13vh;
+    height: min-content;
     margin-bottom: 1rem;
     /* clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%); */
   }
@@ -474,101 +470,6 @@
   
   padding: 5px;}
 .tab a:hover{ background-color: lightgrey}
-
-.trip-budget{
-  flex-grow: 1;
-  margin-left: 20px;
-
-  background-color: #ffffff;
-  overflow-y: auto;
-  height: 60vh;
-}
-
-.b-day{
-  display: flex;
-  width: 65vw;
-  justify-content: center;
-  margin: 5px;
-}
-
-.trip-total{
-  display: flex;
-  width: 65vw;
-  margin: 5px;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-
-  
-}
-
-.total-box{
-  display: flex;
-  margin: 5px;
-  padding: 5px;
-  border: solid black 1px;
-  background-color: #f2f2f2;
-  width: 30vw;
-  flex-direction: column;
-  align-items: center;
-
-}
-
-
-.inner-b{
-  display: flex;
-  margin: 5px;
-  padding: 5px;
-  border: solid black 1px;
-  background-color: #f2f2f2;
-  width: 30vw;
-  flex-direction: column;
-}
-
-.budget {
-  margin: 0;
-  font-weight: bold;
-}
-
-.expense {
-  margin: 5px 0 0 0;
-  font-weight: bold;
-}
-
-.price {
-  margin: 5px 0 0 0;
-  color: navy;
-}
-
-
-.inner-b p:hover{
-  background-color: #f2f2f2;
-  ;
-}
-
-.inner-b p:hover {
-  background-color: #ddd;
-  transform: scale(1.1);
-  transition: transform 0.2s ease-in-out;
-}
-
-
-.active{
-  display: flex;
-  margin-right: 5px;
-  background-color: white;
-  
-}
-
-.budget-event{
-  display: flex;
-  flex-direction: row;
-  width: 28vw;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: solid black 2px;
-}
-
 
 .trip-budget{
   flex-grow: 1;

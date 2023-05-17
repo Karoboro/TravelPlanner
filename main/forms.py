@@ -1,11 +1,16 @@
-from typing import Any, Dict, Mapping, Optional, Type, Union
-
 from django import forms
-from django.core.files.base import File
-from django.db.models.base import Model
-from django.forms.utils import ErrorList
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from .models import Day, Event, Trip
+
+
+class UserForm(UserCreationForm):
+    username = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ["username", "first_name", "last_name"]
 
 
 class TripForm(forms.ModelForm):
@@ -13,8 +18,11 @@ class TripForm(forms.ModelForm):
         model = Trip
         # fields = "__all__"
         fields = ["name", "start_date", "description"]
-        widgets = {"start_date": forms.DateInput(attrs={"type": "date"})}
-
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "start_date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
+            "description": forms.Textarea(attrs={"class": "form-control"}),
+        }
 
 class DayForm(forms.ModelForm):
     trip = forms.ModelChoiceField(queryset=Trip.objects.all(), empty_label=None)
