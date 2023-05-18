@@ -1,16 +1,27 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms.widgets import PasswordInput
 
 from .models import Day, Event, Trip
 
 
 class UserForm(UserCreationForm):
-    username = forms.EmailField()
+    username = forms.EmailField(widget=forms.TextInput(attrs={"class": "form-control my-3"}))
 
     class Meta:
         model = User
         fields = ["username", "first_name", "last_name"]
+        widgets = {
+            # "username": forms.TextInput(attrs={"class": "form-control"}), # doesn't work 
+            "first_name": forms.TextInput(attrs={"class": "form-control my-3"}), 
+            "last_name": forms.TextInput(attrs={"class": "form-control my-3"}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["password1"].widget = PasswordInput(attrs={"class": "form-control my-3"})
+        self.fields["password2"].widget = PasswordInput(attrs={"class": "form-control my-3"})
 
 
 class TripForm(forms.ModelForm):
