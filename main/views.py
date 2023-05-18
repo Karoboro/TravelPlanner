@@ -28,6 +28,13 @@ def create_user(request):
     return render(request, "registration/create_user.html", {"form": form})
 
 
+def view_profile(request):
+    if request.method == "POST":
+        print(request.POST)
+    context = {"user": request.user}
+    return render(request, "registration/profile.html", context)
+
+
 # Create your views here.
 def index(request):
     user = request.user
