@@ -8,11 +8,11 @@
 
 <main class="d-flex align-items-center justify-content-center">
     <div>
-        <div>
+        <div class="col-lg-4">
             <div>
                 <img src="{% static 'images/user.png' %}" width="256" height="256" alt="Profile Picture">
             </div>
-            <div>
+            <div class="fw-normal">
                 <div>
                     <span>Email:</span>
                     <span>{{ user.email }}</span>
@@ -31,10 +31,12 @@
                 {% endif %}
                 <!-- <button>Edit Profile</button> -->
                 <form action="{% url 'password_change' %}">
-                    <button>Change Password</button>
+                    <button class="btn btn-secondary">Change Password</button>
                 </form>
             </div>
         </div>
-    </div>
+    </div>  
+    
+  
 </main>
   {% endblock %}
