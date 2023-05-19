@@ -28,6 +28,7 @@ def create_user(request):
     return render(request, "registration/create_user.html", {"form": form})
 
 
+@login_required
 def view_profile(request):
     if request.method == "POST":
         print(request.POST)
