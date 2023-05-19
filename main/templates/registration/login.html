@@ -2,17 +2,13 @@
 
 {% block content %}
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-
 {% if next %}
-    {% if user.is_authenticated %}
-    <p class="alert alert-warning text-center">Your account doesn't have access to this page. To proceed,
+{% if user.is_authenticated %}
+<p class="alert alert-warning text-center">Your account doesn't have access to this page. To proceed,
     please login with an account that has access.</p>
-    {% else %}
-    <p class="alert alert-warning text-center">Please login to see this page.</p>
-    {% endif %}
+{% else %}
+<p class="alert alert-warning text-center">Please login to see this page.</p>
+{% endif %}
 {% endif %}
 
 <header class="d-flex flex-column align-items-center mt-4">
@@ -22,55 +18,67 @@
 
 <main class="d-flex align-items-center justify-content-center">
     <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-4 shadow-sm my-4">
-        <div class="d-flex flex-column align-items-center h-100 p-4 text-dark">   
+        <div class="d-flex flex-column align-items-center h-100 p-4 text-dark">
             <!-- <h1>Login</h1> -->
             <form method="post" action="{% url 'login' %}">
-            {% csrf_token %}
+                {% csrf_token %}
                 <!-- username -->
                 <div class="pb-3">
                     <div>{{ form.username.label_tag }}</div>
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
-                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"></path>
+                                <path fill-rule="evenodd"
+                                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z">
+                                </path>
                             </svg>
                         </span>
-                        
+
                         <!-- <div>{{ form.username }}</div> -->
-                        <input type="text" name="username" class="form-control" maxlength="200" required="" id="username">
+                        <input type="text" name="username" class="form-control" maxlength="200" required=""
+                            id="username" style="min-width: 400px;">
                     </div>
                 </div>
 
                 <!-- password -->
                 <div class="pb-3">
-                        <div>{{ form.password.label_tag }}</div>
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock-fill" viewBox="0 0 16 16">
-                                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
-                                </svg>
-                            </span>                        
-                            <input type="password" name="password" class="form-control" maxlength="200" required="" id="password">
-                            <!-- <div>{{ form.password }}</div> -->
-                        </div>
+                    <div>{{ form.password.label_tag }}</div>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-lock-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z">
+                                </path>
+                            </svg>
+                        </span>
+                        <input type="password" name="password" class="form-control" maxlength="200" required=""
+                            id="password">
+                        <!-- <div>{{ form.password }}</div> -->
+                    </div>
                 </div>
 
-            <div class="d-flex justify-content-center pb-3">
-                <input class="btn btn-primary" type="submit" value="login">
-                <input type="hidden" name="next" value="{{ next }}">
-            </div>
-            
-            <!-- links -->
-            <div class="d-flex flex-column align-items-center">
-                {# Assumes you set up the password_reset view in your URLconf #}
-                <div><a href="{% url 'password_reset' %}">Forgot password?</a></div>
-                <div><a href="{% url 'create_user' %}">New to BonVoyage?</a></div>
-            </div>
+                {% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+                {% endif %}
+
+                <div class="d-flex justify-content-center pb-3">
+                    <input class="btn btn-primary" type="submit" value="login">
+                    <input type="hidden" name="next" value="{{ next }}">
+                </div>
+
+                <!-- links -->
+                <div class="d-flex flex-column align-items-center">
+                    {# Assumes you set up the password_reset view in your URLconf #}
+                    <div><a href="{% url 'password_reset' %}">Forgot password?</a></div>
+                    <div><a href="{% url 'create_user' %}">New to BonVoyage?</a></div>
+                </div>
 
             </form>
 
-        </div> 
+        </div>
     </div>
 </main>
 {% endblock %}
