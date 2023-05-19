@@ -3,54 +3,49 @@
 
 {% block content %}
 <header>
-    <h1 class="text-center my-4">User Profile</h1>
+  <h1 class="text-center my-4">User Profile</h1>
 </header>
 
 <main>
-    
-    
-        <div class="container h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-lg-10 mb-4 mb-lg-0">
-              <div class="card mb-3" style="border-radius: .5rem;">
-                <div class="row g-0">
-                  <div class="col-md-4 mb-4 p-2 gradient-custom text-center text-black"
-                    style="border-top-left-radius: 1.0rem; border-bottom-left-radius: 1.0rem;">
-                    <img class="img-fluid my-5" src="{% static 'images/user.png' %}" width="256" height="256" alt="Profile Picture">
-                    <form action="{% url 'password_change' %}">
-                        <button class="btn btn-secondary">Change Password</button>
-                    </form>
-                    {% comment %} <i class="far fa-edit mb-5"></i> {% endcomment %}
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body p-4">
-                      <h6>Information</h6>
-                      <hr class="mt-0 mb-4">
-                      <div class="row pt-1">
-                        <div>
-                            <span>Email:</span>
-                            <span>{{ user.email }}</span>
-                        </div>
-                        {% if user.first_name %}
-                        <div>
-                            <span>First Name:</span>
-                            <span>{{ user.first_name }}</span>
-                        </div>
-                        {% endif %}
-                        {% if user.last_name %}
-                        <div>
-                            <span>Last Name:</span>
-                            <span>{{ user.last_name }}</span>
-                        </div>
-                        {% endif %}
-                     
-                    </div>
-                  </div>
-                </div>
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-10 mb-4 mb-lg-0">
+        <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-md-4 mb-4 p-2 gradient-custom text-center text-black"
+              style="border-top-left-radius: 1.0rem; border-bottom-left-radius: 1.0rem;">
+              <img class="img-fluid my-2" src="{% static 'images/user.png' %}" width="256" height="256"
+                alt="Profile Picture">
+              <form action="{% url 'password_change' %}">
+                <button class="btn btn-secondary">Edit Profile</button>
+              </form>
+              <form action="{% url 'password_change' %}">
+                <button class="btn btn-secondary mt-2">Change Password</button>
+              </form>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body p-4">
+                <h3>Information</h3>
+                <hr class="mt-0 mb-4">
+                <table class="row pt-1">
+                  <tr>
+                    <td class="p-3"><b>Email:</b></td>
+                    <td>{{ user.email }}</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3"><b>First Name:</b></td>
+                    <td>{{ user.first_name }}</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3"><b>Last Name:</b></td>
+                    <td>{{ user.last_name }}</td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
         </div>
-  
+      </div>
+    </div>
 </main>
-  {% endblock %}
+{% endblock %}
