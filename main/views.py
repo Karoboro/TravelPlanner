@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .forms import DayForm, EventForm, TripForm, UserForm
+from .forms import DayForm, EventForm, TripForm, UpdateUserForm, UserForm
 from .models import Day, Event, Trip
 
 
@@ -28,11 +28,24 @@ def create_user(request):
     return render(request, "registration/create_user.html", {"form": form})
 
 
+@login_required
 def view_profile(request):
-    if request.method == "POST":
-        print(request.POST)
     context = {"user": request.user}
     return render(request, "registration/profile.html", context)
+
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    form = UpdateUserForm(instance=user)
+    context = {"user": user, "form": form}
+    if request.method == "POST":
+        form = UpdateUserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("profile"))
+    else:
+        return render(request, "registration/edit_profile.html", context)
 
 
 # Create your views here.
