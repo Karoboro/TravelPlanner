@@ -30,6 +30,16 @@ class UserForm(UserCreationForm):
         )
 
 
+class UpdateUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name"]
+        widgets = {
+            "first_name": forms.TextInput(attrs={"class": "form-control my-3"}),
+            "last_name": forms.TextInput(attrs={"class": "form-control my-3"}),
+        }
+
+
 class TripForm(forms.ModelForm):
     class Meta:
         model = Trip

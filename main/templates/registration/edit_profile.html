@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<header>
+    <h1 class="text-center my-4">Update User Profile</h1>
+</header>
+
+<main>
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="card-body p-4">
+                            <h3>Information</h3>
+                            <hr class="mt-0 mb-4">
+                            <form method="post" action="{% url 'edit_profile' %}">
+                                {% csrf_token %}
+                                <table class="row pt-1">
+                                    <tr>
+                                        <td class="p-3"><b>Email:</b></td>
+                                        <td>{{ user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3"><b>First Name:</b></td>
+                                        <td>{{ form.first_name }}</td>
+                                    </tr>
+                                    <tr>{{ form.first_name.errors }}</tr>
+                                    <tr>
+                                        <td class="p-3"><b>Last Name:</b></td>
+                                        <td>{{ form.last_name }}</td>
+                                    </tr>
+                                    <tr>{{ form.last_name.errors }}</tr>
+                                </table>
+                                <button class="btn btn-secondary mt-2">Update Profile</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
+{% endblock %}
