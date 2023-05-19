@@ -6,41 +6,53 @@
     <h1 class="text-center my-4">User Profile</h1>
 </header>
 
-<main class="d-flex align-items-center justify-content-center">
-    <div>
-        <div class="">
-            <div>
-                <img src="{% static 'images/user.png' %}" width="256" height="256" alt="Profile Picture">
-            </div>
-            <div class="fw-normal">
-                <div class="d-flex m-3 justify-content-between">
-                    <span>Email:</span>
-                    <span>{{ user.email }}</span>
-                </div>
-                {% if user.first_name %}
-                <div class="d-flex m-3 justify-content-between">
-                    <span>First Name:</span>
-                    <span>{{ user.first_name }}</span>
-                </div>
-                {% endif %}
-                {% if user.last_name %}
-                <div class="d-flex m-3 justify-content-between">
-                    <span>Last Name:</span>
-                    <span>{{ user.last_name }}</span>
-                </div>
-                {% endif %}
-                <!-- <button>Edit Profile</button> -->
-                <form class="d-flex justify-content-center" action="{% url 'password_change' %}">
-                    <button class="btn btn-secondary">Change Password</button>
-                </form>
-
-                <!-- <div class="d-flex justify-content-center pt-3">
-                    <button class="btn btn-secondary"><a class="nav-link text-white" href="/accounts/logout/">Logout</a></button>
-                </div> -->
-            </div>
-        </div>
-    </div>  
+<main>
     
+    <section class="vh-100" style="background-color: #f4f5f7;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-lg-6 mb-4 mb-lg-0">
+              <div class="card mb-3" style="border-radius: .5rem;">
+                <div class="row g-0">
+                  <div class="col-md-4 gradient-custom text-center text-black"
+                    style="border-top-left-radius: 1.0rem; border-bottom-left-radius: 1.0rem;">
+                    <img class="img-fluid my-5" src="{% static 'images/user.png' %}" width="80" height="80" alt="Profile Picture">
+                    
+                    <form action="{% url 'password_change' %}">
+                        <button class="btn btn-secondary">Change Password</button>
+                    </form>
+                    <i class="far fa-edit mb-5"></i>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body p-4">
+                      <h6>Information</h6>
+                      <hr class="mt-0 mb-4">
+                      <div class="row pt-1">
+                        <div>
+                            <span>Email:</span>
+                            <span>{{ user.email }}</span>
+                        </div>
+                        {% if user.first_name %}
+                        <div>
+                            <span>First Name:</span>
+                            <span>{{ user.first_name }}</span>
+                        </div>
+                        {% endif %}
+                        {% if user.last_name %}
+                        <div>
+                            <span>Last Name:</span>
+                            <span>{{ user.last_name }}</span>
+                        </div>
+                        {% endif %}
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
   
 </main>
   {% endblock %}
