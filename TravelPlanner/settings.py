@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-abdv^54zuxz3(i@*jpf!o2=ly$lfa82(z4i*g(z+y!pj#&s58%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver", "164.92.74.41"]
 
 
 # Application definition
@@ -115,6 +115,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+STATIC_ROOT = '/home/weby/pyapps/TravelPlanner/static/'
+
 
 STATIC_URL = "/static/"
 
@@ -125,3 +127,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # For Email Password Reset
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+
+
