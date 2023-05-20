@@ -40,7 +40,7 @@
           <a href="{% url 'delete_trip' trip.pk %}" onclick="return confirm('Are you sure you want to delete this item?')"><button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i> Delete Trip</button></a>
       </div>
   </div>
-  <div class="card bg-light mt-1 p-3">
+  <div class="fw-light border-bottom mt-1 mb-3 py-3 px-1">
     <p class="mb-0"><strong>Start Date: </strong>{{ trip.start_date }}</p>
     <p class="card-text"><strong>Description: </strong>{{ trip.description }}</p>
   </div>
@@ -48,7 +48,7 @@
       {% for day in trip.day_set.all %}
       
       <div class="col">
-        <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow-lg">
+        <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow">
           <div class="d-flex flex-column h-100 p-5 pb-3 text-dark">
             <h2 class=" mt-0 mb-4 display-6 lh-1 fw-bold"> Day {{ day.num }}</h2>
             {% for event in day.event_set.all %}
@@ -72,8 +72,8 @@
       {% endfor %}
       <div class="col">
         <a href="{% url 'add_day' trip.id %}" class="text-decoration-none">
-          <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg">
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1 justify-content-center align-items-center">
+          <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow">
+            <div class="d-flex flex-column h-100 p-4 text-white justify-content-center align-items-center">
               <i class="bi bi-calendar-plus fs-1"></i>
               <h2 class="mt-2 mb-4 display-6 lh-1 fw-bold text-center">Add Day</h2>
             </div>

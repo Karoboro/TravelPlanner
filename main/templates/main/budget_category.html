@@ -56,7 +56,7 @@
                 </ul>
 
 
-                <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow-lg my-4">
+                <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow my-4">
                     <div class="d-flex flex-column align-items-center h-100 p-5 text-dark">
                         <h2>Trip Total</h2>
                         <div>${{ total }}</div>
@@ -65,7 +65,7 @@
 
                 <!-- <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-1"> -->
                 {% for category, cost in trip.generate_expense_dict.items %}
-                    <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow-lg mb-4">
+                    <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow mb-4">
                         <div class="d-flex flex-column h-100 p-5 text-dark">
                             <div class="d-flex justify-content-between pb-3">
                                 <h3>{{ category }}</h3>
