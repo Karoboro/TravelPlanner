@@ -41,8 +41,8 @@
       </div>
   </div>
   <div class="fw-light border-bottom mt-1 mb-3 py-3 px-1">
-    <p class="mb-0"><strong>Start Date: </strong>{{ trip.start_date }}</p>
-    <p class="card-text"><strong>Description: </strong>{{ trip.description }}</p>
+    <p class="mb-0"><strong class="fw-bold">Start Date: </strong>{{ trip.start_date }}</p>
+    <p class="card-text"><strong class="fw-bold">Description: </strong>{{ trip.description }}</p>
   </div>
       <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-1">
       {% for day in trip.day_set.all %}
@@ -51,7 +51,7 @@
         <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-5 shadow">
           <div class="d-flex flex-column h-100 p-5 pb-3 text-dark">
             <h2 class=" mt-0 mb-4 display-6 lh-1 fw-bold"> Day {{ day.num }}</h2>
-            {% for event in day.event_set.all %}
+            {% for event in day.event_set.all|dictsort:"time" %}
             <h4>{{ event.time }}</h4>
             <p>{{ event.name }}</p>
             {% endfor %}

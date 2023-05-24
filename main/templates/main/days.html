@@ -20,7 +20,7 @@
 </header>
 <main>
     <div class="d-flex flex-column align-items-center px-4">
-        {% for event in day.event_set.all %}
+        {% for event in day.event_set.all|dictsort:"time" %}
         <div class="card h-100 overflow-hidden text-dark bg-light rounded-5 shadow mb-4" style="max-width: 600px;">
             <div class="d-flex flex-column h-100 p-4 text-dark">
                 <div class="d-flex align-items-center justify-content-between">
