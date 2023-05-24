@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="d-flex flex-column align-items-center mt-4">
+    <h1>Your Adventure Begins Here</h1>
+    <h2 class="fw-light">Create Your BonVoyage Account</h2>
+</header>
+
+
+
+<main class="d-flex align-items-center justify-content-center">
+    <div class="card card-cover h-100 overflow-hidden text-dark bg-light rounded-4 shadow-sm my-4">
+        <div class="pt-3 px-3">
+            <a href="{% url 'login' %}" class="btn btn-outline-primary">&larr; Go Back</a>
+        </div>
+
+        <div class="d-flex flex-column align-items-center h-100 p-4 text-dark"> 
+            <div class="container">
+                <form method="post" class="event-form">
+                    {% csrf_token %}
+                    {{ form.as_div }}
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

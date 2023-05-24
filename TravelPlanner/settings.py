@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-abdv^54zuxz3(i@*jpf!o2=ly$lfa82(z4i*g(z+y!pj#&s58%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "testserver"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "testserver"]
 
 
 # Application definition
@@ -122,3 +122,6 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# For Email Password Reset
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

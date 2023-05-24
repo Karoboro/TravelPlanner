@@ -1,6 +1,6 @@
-# from django.contrib.auth.models import User
 from datetime import date
 
+from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 from django.db import models, transaction
 
@@ -10,7 +10,7 @@ class Trip(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
     start_date = models.DateField("Start Date", default=date.today)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
