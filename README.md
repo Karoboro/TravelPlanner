@@ -49,6 +49,6 @@ password: admin
 ## To run our app
 Make sure you finish all steps above
 
-`python manage.py runserver'
+`python manage.py runserver`
 
 Server can be access at http://127.0.0.1:8000/
