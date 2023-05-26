@@ -104,35 +104,4 @@
   </div>
 
 </div>
-
-
-
-
-
-
-<!-- <div class="col-md-9">
-      {% if trip.pk %}
-        <h2 class="my-4">{{ trip.name }}<a href="{% url 'edit_trip' trip.pk %}"><button class="btn btn-outline-primary ml-2">Edit</button></a></h2>
-        <p>{{ trip.start_date }}</p>
-        <p>{{ trip.description }}</p>
-        {% for day in trip.day_set.all %}
-        <div class="card my-3">
-          <div class="card-body">
-            <h3 class="card-title">Day: {{ day.num }}<a href="{% url 'edit_day' day.pk %}"><button class="btn btn-outline-primary ml-2">Edit</button></a></h3>
-            <p class="card-text">{{ day.description }}</p>
-            {% for event in day.event_set.all %}
-            <h4>{{ event.time }}</h4>
-            <p>{{ event.name }}</p>
-            {% endfor %}
-          </div>
-        </div>
-        {% endfor %}
-        <a href="{% url 'add_day' trip.id %}"><button class="btn btn-primary">Add Day</button></a>
-      {% else %}
-        <h2>Welcome to BonVoyage!</h2>
-        <h3>Please select or create a trip.</h3>
-      {% endif %}
-    </div>
-  </div>
-</div> -->
 {% endblock %}
