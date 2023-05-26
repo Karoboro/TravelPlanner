@@ -74,3 +74,10 @@ Our static files, such as images (logos and icons) and a stylesheet file.
 
 ### fixtures
 Our fixture file, data to be seeded into our database to be used for unit and function testing.
+
+# Notes about the Project
+Password reset for forgot password currently outputs email message to the django terminal to avoid 
+the need to create fake user emails.
+
+Click on the reset password link inside the email body in django terminal to be redirected to 
+the password reset page.
