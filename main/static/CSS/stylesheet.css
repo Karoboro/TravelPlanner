@@ -7,3 +7,16 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.background-image {
+  background: white url("../images/background.png") no-repeat center;
+  background-size: cover;
+  position: relative;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
